@@ -1,0 +1,21 @@
+<% if @pile.errors.any? %>
+    <ul>
+        <% @pile.errors.messages.each do |key, m| %>
+            <li>
+                <%= key %>, <%= m[0] %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
+
+<%= form_for @pile do |f| %>
+  <p>
+    <%= f.label :memo %>
+    <%= f.text_field :memo %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

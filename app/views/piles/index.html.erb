@@ -1,0 +1,22 @@
+<%= link_to 'new', new_pile_path %>
+
+<ul>
+  <% @piles.each do |pile| %>
+    <% content = Content.find(pile.content_id) %>
+
+    <li>
+      <% pile.platform_ids.each do |platform_id| %>
+        [<%= Platform.find(platform_id).name %>]
+      <% end %>
+
+
+      <%= link_to content.name, content_path(content.id) %>
+      <p><%= pile.memo %></p>
+
+      <%= link_to "edit", edit_pile_path(pile.id) %>
+      <%= link_to "delete", pile_path(pile.id), method: :delete %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "home", root_path %>

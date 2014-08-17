@@ -1,0 +1,27 @@
+<% if @user.authority != 0 %>
+  <%= link_to('pile', piles_path) %>
+<% end %>
+
+<%= @user.name %>
+<% if @user.authority == 0 %>
+  <%= link_to 'ログイン', '/auth/twitter' %>
+<% else %>
+  <%= link_to 'ログアウト', logout_path %>
+<% end %>
+
+<%
+=begin
+<p>退会</p>
+=end
+%>
+
+
+<ul>
+  <% @rankings.each do |ranking| %>
+    <% content = ranking[:content] %>
+    <li>
+      <%= link_to content.name, content_path(content.id) %>
+      <%= ranking[:count] %>
+    </li>
+  <% end %>
+</ul>
