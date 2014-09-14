@@ -24,6 +24,10 @@
     <%= f.text_field :memo %>
   </p>
 
+  piling<%= radio_button 'pile', 'status', 'piling', checked: @pile.piling? %>
+  playing<%= radio_button 'pile', 'status', 'playing', checked: @pile.playing? %>
+  done<%= radio_button 'pile', 'status', 'done', checked: @pile.done? %>
+
   <p>
     <%= f.submit %>
   </p>

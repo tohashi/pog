@@ -8,4 +8,6 @@ class Pile < ActiveRecord::Base
   validates :memo, presence: true
 
   serialize :platform_ids, Array
+
+  enum status: {piling: 0, playing: 1, done: 2}
 end

@@ -11,8 +11,9 @@
 
 
       <%= link_to content.name, content_path(content.id) %>
+      <p><%= pile.status %></p>
       <p><%= pile.memo %></p>
-      <p><%= pile.updated_at %></p>
+      <p><%= time_ago_in_words pile.updated_at %> ago</p>
 
       <%= link_to "edit", edit_pile_path(pile.id) %>
       <%= link_to "delete", pile_path(pile.id), method: :delete %>

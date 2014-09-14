@@ -68,7 +68,7 @@ class PilesController < ApplicationController
 
   private
     def pile_params
-      params[:pile].permit(:memo)
+      params[:pile].permit(:memo, :status)
     end
 
     def set_values

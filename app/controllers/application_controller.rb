@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
 
     def guest_user
-      User.find_by(authority: 0)
+      User.guest.first
     end
 
 end

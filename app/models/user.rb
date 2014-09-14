@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
 
+  enum authority: {guest: 0, registrant: 1, admin: 2}
+
   def self.create_with_auth(auth)
     # with execption
     create! do |user|

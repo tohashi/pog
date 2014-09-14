@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140913095720) do
+ActiveRecord::Schema.define(version: 20140914034452) do
 
   create_table "contents", force: true do |t|
     t.string   "name",       null: false
@@ -20,13 +20,13 @@ ActiveRecord::Schema.define(version: 20140913095720) do
   end
 
   create_table "piles", force: true do |t|
-    t.integer  "user_id",                      null: false
-    t.integer  "content_id",                   null: false
+    t.integer  "user_id",                  null: false
+    t.integer  "content_id",               null: false
     t.string   "memo"
-    t.boolean  "done",         default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "platform_ids",                 null: false
+    t.string   "platform_ids",             null: false
+    t.integer  "status",       default: 0, null: false
   end
 
   create_table "platforms", force: true do |t|
