@@ -27,6 +27,8 @@ module Pog
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.time_zone = 'Tokyo'
+    config.encoding = "utf-8"
     config.autoload_paths += %W(#{config.root}/lib)
   end
 end
