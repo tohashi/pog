@@ -15,9 +15,20 @@
 =end
 %>
 
-
+<h5>60min</h5>
 <ul>
-  <% @rankings.each do |ranking| %>
+  <% @ranking_60min.each do |ranking| %>
+    <% content = ranking[:content] %>
+    <li>
+      <%= link_to content.name, content_path(content.id) %>
+      <%= ranking[:count] %>
+    </li>
+  <% end %>
+</ul>
+
+<h5>all</h5>
+<ul>
+  <% @ranking_all.each do |ranking| %>
     <% content = ranking[:content] %>
     <li>
       <%= link_to content.name, content_path(content.id) %>

@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
 
   def index
-    @rankings = Content.get_content_rankings(Pile.pluck('content_id'))
+    @ranking_all = Content.get_content_rankings(Pile.get_content_ids)
+
+    @ranking_60min = Content.get_content_rankings(Pile.get_content_ids(3600))
   end
 end
