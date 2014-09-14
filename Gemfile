@@ -45,6 +45,8 @@ gem 'omniauth-facebook'
 gem 'heroku'
 gem 'rails_12factor'
 
+gem 'grape'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'better_errors'
