@@ -1,9 +1,9 @@
-<% if @user.authority != 0 %>
+<% if !@user.guest? %>
   <%= link_to('pile', piles_path) %>
 <% end %>
 
 <%= @user.name %>
-<% if @user.authority == 0 %>
+<% if @user.guest? %>
   <%= link_to 'ログイン', '/auth/twitter' %>
 <% else %>
   <%= link_to 'ログアウト', logout_path %>
