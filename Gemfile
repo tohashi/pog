@@ -47,6 +47,9 @@ gem 'rails_12factor'
 
 gem 'grape'
 
+# frontend
+gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'better_errors'

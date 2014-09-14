@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/reactjs/react-rails.git
+  revision: 45ca4ad0d8e7f3030438388ae331ea98e98f73f4
+  specs:
+    react-rails (1.0.0.pre)
+      connection_pool
+      execjs
+      rails (>= 3.1)
+      react-source (= 0.11.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,6 +58,7 @@ GEM
       execjs
     coffee-script-source (1.7.1)
     columnize (0.8.9)
+    connection_pool (2.0.0)
     debugger (1.6.8)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -174,6 +185,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    react-source (0.11.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec-core (3.0.2)
@@ -253,6 +265,7 @@ DEPENDENCIES
   pry-rails
   rails (= 4.1.4)
   rails_12factor
+  react-rails (~> 1.0.0.pre)!
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

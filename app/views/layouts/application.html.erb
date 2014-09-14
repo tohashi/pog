@@ -3,12 +3,44 @@
 <head>
   <title>pog</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<header>
+  <div data-component="navbar" class="clearfix white bg-dark-gray">
+    <div class="left">
+      <div class="bold nav mobile-nav-table nav-big nav-dark">
+        <a href="#">pog</a>
+      </div>
+    </div>
+    <div class="right">
+      <div class="bold nav nav-big nav-dark">
+        <% if @user.guest? %>
+          <% #TODO twitterのボタン？ %>
+          <%= link_to 'Login', '/auth/twitter' %>
+        <% else %>
+          <%= link_to @user.name, logout_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>
+
 <%= yield %>
+
+<footer>
+  <div class="center bg-light-gray">
+    <div class="h5 bold nav mobile-nav-table nav-small bg-light-gray rounded absolute-center">
+      <a href="/">Home</a>
+      <span class="nav-item"> | </span>
+      <a href="/"></a>
+    </div>
+    <p>Copyright</p>
+  </div>
+</footer>
+
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 </body>
 </html>

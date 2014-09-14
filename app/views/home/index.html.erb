@@ -4,9 +4,8 @@
 
 <%= @user.name %>
 <% if @user.guest? %>
-  <%= link_to 'ログイン', '/auth/twitter' %>
+  <p>積みゲーの記録をつける</p>
 <% else %>
-  <%= link_to 'ログアウト', logout_path %>
   <%= link_to 'Delete account', delete_account_path(@user.id), method: :delete %>
 <% end %>
 
