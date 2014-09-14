@@ -29,6 +29,9 @@ module Pog
 
     config.time_zone = 'Tokyo'
     config.encoding = "utf-8"
+
+    config.paths.add "app/api", glob: "**/*.rb"
+    config.autoload_paths += %W(#{config.root}/app/api/*)
     config.autoload_paths += %W(#{config.root}/lib)
   end
 end

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   delete '/user/:id' => 'home#destroy', as: :delete_account
 
+  mount API => '/'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
