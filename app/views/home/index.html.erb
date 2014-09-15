@@ -1,6 +1,6 @@
 <div class="text-center">
-  <h1>pog</h1>
-  <p>プレイ中・積み中のゲームを記録しておく事ができます。</p>
+  <h1 class="pog-logo aldrich">pog</h1>
+  <p>プレイ中・積み中のゲームを記録・共有できるWebサービス</p>
   <% if !@user.guest? %>
     <p>
       <a href="/piles" class="btn btn-primary btn-lg">pile</a>
@@ -19,24 +19,28 @@
   <a href="#!">Total</a>
 </div>
 
-<h5>60min</h5>
-<ul>
-  <% @ranking_60min.each do |ranking| %>
+<h5>24h</h5>
+<ul class="list-group">
+  <% @ranking_24h.each do |ranking| %>
     <% content = ranking[:content] %>
-    <li>
-      <%= link_to content.name, content_path(content.id) %>
-      <%= ranking[:count] %>
-    </li>
+    <%= link_to(content_path(content.id)) do %>
+      <li class="list-group-item">
+        <span class="badge"><%= ranking[:count] %></span>
+        <%= content.name %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
 <h5>all</h5>
-<ul>
+<ul class="list-group">
   <% @ranking_all.each do |ranking| %>
     <% content = ranking[:content] %>
-    <li>
-      <%= link_to content.name, content_path(content.id) %>
-      <%= ranking[:count] %>
-    </li>
+    <%= link_to(content_path(content.id)) do %>
+      <li class="list-group-item">
+        <span class="badge"><%= ranking[:count] %></span>
+        <%= content.name %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
