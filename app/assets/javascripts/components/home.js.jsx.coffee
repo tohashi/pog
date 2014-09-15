@@ -5,7 +5,9 @@ POG.Home = React.createClass
   getInitialState: ->
     data: []
 
-  componentDidMount: ->
+  onClick: (e) ->
+    e.preventDefault()
+    $('.js-new-modal').modal()
 
   render: ->
     `<div>
@@ -13,7 +15,7 @@ POG.Home = React.createClass
         <h1 className="pog-logo aldrich">pog</h1>
         <p>積みゲーを記録・共有できるWebサービス</p>
         <p>
-          <a href="/piles" className="btn btn-primary btn-lg">Add New</a>
+          <a href="#" className="btn btn-primary btn-lg" onClick={this.onClick}>Add New</a>
         </p>
       </div>
 

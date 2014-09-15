@@ -44,49 +44,51 @@
   </div>
 
   <div class="js-modal-container"> 
-    <div class="js-edit-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="js-edit-modal js-new-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            <h4 class="modal-title" id="myModalLabel">Add New</h4>
           </div>
           <div class="modal-body">
-            <form accept-charset="UTF-8" action="/piles" class="new_pile" id="new_pile" method="post">
-              <div style="display:none">
-                <input name="utf8" type="hidden" value="✓">
-                <input name="authenticity_token" type="hidden" value="NHSVzpjcJOXpM3+8UJCKLhaOYPnP+zM+91Wj5ydUpew=">
+
+            <form role="form" accept-charset="UTF-8">
+              <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="content_name" type="text" placeholder="Destiny">
               </div>
-              <p>
-                <label for="pile_name">Name</label>
-                <input id="content_name" name="content_name" type="text">
-              </p>
-              <p>
-                <label for="pile_platform">Platform</label>
-                <input id="platform_names" name="platform_names" type="text">
-              </p>
-              カンマ区切りで複数指定できます。
+              <div class="form-group">
+                <label>Platform(カンマ区切りで複数指定)</label>
+                <input class="form-control" name="platform_names" type="text" placeholder="PS4,3DS,Steam">
+              </div>
 
-              <p>
-                <label for="pile_memo">Memo</label>
-                <input id="pile_memo" name="pile[memo]" type="text">
-              </p>
+              <div class="form-group">
+                <label>Memo</label>
+                <textarea class="form-control" name="memo" rows="2" cols="40"></textarea>
+              </div>
 
-              piling<input checked="checked" id="pile_status_piling" name="pile[status]" type="radio" value="piling">
-              playing<input id="pile_status_playing" name="pile[status]" type="radio" value="playing">
-              done<input id="pile_status_done" name="pile[status]" type="radio" value="done">
-
-              <p>
-                <input name="commit" type="submit" value="Create Pile">
-              </p>
-
+              <div class="form-group">
+                <label>Status</label><br>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="piling" checked="checked"> 積み
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="playing"> プレイ中
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="done"> Done
+                </label>
+              </div>
             </form>
 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary">Add</button>
           </div>
+
         </div>
       </div>
     </div>
