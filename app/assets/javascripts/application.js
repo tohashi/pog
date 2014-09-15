@@ -15,5 +15,5 @@
 //= require bootstrap-sprockets
 //= require react
 //
-//= require home
 //= require main
+//= require_tree ./components

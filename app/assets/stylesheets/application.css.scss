@@ -5,16 +5,20 @@ body { padding-top: 60px; }
 @import url(http://fonts.googleapis.com/css?family=Aldrich);
 
 .pog-logo {
-  font-size: 52px;
+    font-size: 52px;
 }
 
 .aldrich {
-  font-family: 'Aldrich', sans-serif;
+    font-family: 'Aldrich', sans-serif;
 }
 
 .footer {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-top: 100px;
-  border-top: 1px solid #e5e5e5;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 100px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.inline {
+    display: inline;
 }

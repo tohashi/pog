@@ -11,12 +11,48 @@
 
 
       <%= link_to content.name, content_path(content.id) %>
-      <p><%= pile.status %></p>
-      <p><%= pile.memo %></p>
-      <p><%= time_ago_in_words pile.updated_at %> ago</p>
 
       <%= link_to "edit", edit_pile_path(pile.id) %>
       <%= link_to "delete", pile_path(pile.id), method: :delete %>
     </li>
   <% end %>
 </ul>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Panel heading</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Platform</th>
+        <th>Title</th>
+        <th>Memo</th>
+        <th>Last Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @piles.each do |pile| %>
+        <% content = Content.find(pile.content_id) %>
+        <tr>
+          <td>
+            <%= pile.status %>
+          </td>
+          <td>
+            <% pile.platform_ids.each do |platform_id| %>
+              [<%= Platform.find(platform_id).name %>]
+            <% end %>
+          </td>
+          <td>
+            <%= link_to content.name, content_path(content.id) %>
+          </td>
+          <td>
+            <%= pile.memo %>
+          </td>
+          <td>
+            <%= time_ago_in_words pile.updated_at %> ago
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
