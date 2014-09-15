@@ -1,8 +1,10 @@
-<div class="center">
+<div class="text-center">
   <h1>pog</h1>
   <p>プレイ中・積み中のゲームを記録しておく事ができます。</p>
   <% if !@user.guest? %>
-    <a href="#!" class="button button-big button-blue">pile</a>
+    <p>
+      <a href="/piles" class="btn btn-primary btn-lg">pile</a>
+    </p>
   <% end %>
 </div>
 
