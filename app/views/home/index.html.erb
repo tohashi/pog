@@ -19,28 +19,10 @@
   <a href="#!">Total</a>
 </div>
 
+
 <h5>24h</h5>
-<ul class="list-group">
-  <% @ranking_24h.each do |ranking| %>
-    <% content = ranking[:content] %>
-    <%= link_to(content_path(content.id)) do %>
-      <li class="list-group-item">
-        <span class="badge"><%= ranking[:count] %></span>
-        <%= content.name %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+<div class="js-ranking-day"></div>
+
 
 <h5>all</h5>
-<ul class="list-group">
-  <% @ranking_all.each do |ranking| %>
-    <% content = ranking[:content] %>
-    <%= link_to(content_path(content.id)) do %>
-      <li class="list-group-item">
-        <span class="badge"><%= ranking[:count] %></span>
-        <%= content.name %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+<div class="js-ranking-all"></div>

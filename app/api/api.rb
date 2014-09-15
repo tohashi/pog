@@ -12,16 +12,6 @@ class API < Grape::API
     end
   end
 
-  resource :test do
-    get '/hello' do
-      { hello: 'world' }
-    end
-
-    get :hi do
-      'hi'
-    end
-  end
-
   resource :user do
     desc 'returns all users'
     get do
@@ -37,6 +27,18 @@ class API < Grape::API
       get do
         current_user
       end
+    end
+  end
+
+  resource :ranking do
+    desc 'returns ranking'
+    get :all do
+      Content.get_content_rankings(Pile.get_content_ids)
+    end
+
+    desc 'returns 24h ranking'
+    get :day do
+      Content.get_content_rankings(Pile.get_content_ids(86400))
     end
   end
 end
