@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require react
 //= require_tree .
+//= require bootstrap-sprockets
