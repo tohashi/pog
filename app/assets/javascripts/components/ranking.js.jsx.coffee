@@ -17,19 +17,37 @@ POG.Piles = React.createClass
   componentDidMount: ->
     @load()
 
+  onClick: (e) ->
+    e.preventDefault()
+    $('.js-edit-modal').modal()
+
   render: ->
-    pileNodes = @state.data.map (pile) ->
+    pileNodes = @state.data.map ((pile) ->
       platformNodes = pile.platforms.map (platform) ->
         `<div className="inline">[{platform.name}]</div>`
+      listClassName = do ->
+        'list-group-item clearfix'
+        ###
+        switch pile.status
+          when 0 then 'bg-piling'
+          when 1 then 'bg-playing'
+          when 2 then 'bg-done'
+        ###
 
-      `<li className="list-group-item">
-        <h4 className="list-group-item-heading">
-          {platformNodes}
-          {pile.content.name}
-        </h4>
-        <p className="list-group-item-text">edit</p>
-        <p className="list-group-item-text">delete</p>
+      `<li className={listClassName} onClick={this.onClick}>
+        <div className="pull-left">
+          <h4 className="list-group-item-heading">
+            {platformNodes}
+            {pile.content.name}
+          </h4>
+          <p className="list-group-item-text">{pile.memo}</p>
+        </div>
+
+        <div className="pull-right">
+          <p className="list-group-item-text">{pile.last_updated} ago</p>
+        </div>
       </li>`
+    ).bind @
 
     `<div>
       <ul className="list-group">

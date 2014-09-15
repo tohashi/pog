@@ -1,3 +1,5 @@
+include ActionView::Helpers::DateHelper
+
 class API < Grape::API
   prefix 'api'
   format :json
@@ -77,6 +79,7 @@ class API < Grape::API
         end
 
         pile.attributes.merge({
+          'last_updated' => time_ago_in_words(pile.updated_at),
           'content' => content,
           'platforms' => platforms
         })
