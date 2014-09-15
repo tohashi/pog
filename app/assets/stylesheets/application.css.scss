@@ -1,7 +1,7 @@
-@import "bootswatch/lumen/variables";
+@import "bootswatch/cyborg/variables";
 @import "bootstrap";
 body { padding-top: 60px; }
-@import "bootswatch/lumen/bootswatch";
+@import "bootswatch/cyborg/bootswatch";
 @import url(http://fonts.googleapis.com/css?family=Aldrich);
 
 .pog-logo {
@@ -19,18 +19,35 @@ body { padding-top: 60px; }
     border-top: 1px solid #e5e5e5;
 }
 
-.inline {
-    display: inline;
-}
-
 .bg-piling {
-    background-color: #00b4b5;
+    background-color: #009495;
 }
 
 .bg-playing {
-    background-color: #ffd600;
+    background-color: #ac0479;
 }
 
 .bg-done {
-    background-color: #cc1499;
+    background-color: #cfa600;
+}
+
+.pile-title {
+    margin-left: 4px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.platform-badge {
+    display: inline;
+    vertical-align: text-top;
+    background-color: $gray;
+}
+
+.pile-list {
+    color: #eee;
+}
+
+.pile-memo {
+    margin-left: 4px;
 }

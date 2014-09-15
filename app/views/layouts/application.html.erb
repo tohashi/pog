@@ -52,7 +52,36 @@
             <h4 class="modal-title" id="myModalLabel">Modal title</h4>
           </div>
           <div class="modal-body">
-            ...
+            <form accept-charset="UTF-8" action="/piles" class="new_pile" id="new_pile" method="post">
+              <div style="display:none">
+                <input name="utf8" type="hidden" value="✓">
+                <input name="authenticity_token" type="hidden" value="NHSVzpjcJOXpM3+8UJCKLhaOYPnP+zM+91Wj5ydUpew=">
+              </div>
+              <p>
+                <label for="pile_name">Name</label>
+                <input id="content_name" name="content_name" type="text">
+              </p>
+              <p>
+                <label for="pile_platform">Platform</label>
+                <input id="platform_names" name="platform_names" type="text">
+              </p>
+              カンマ区切りで複数指定できます。
+
+              <p>
+                <label for="pile_memo">Memo</label>
+                <input id="pile_memo" name="pile[memo]" type="text">
+              </p>
+
+              piling<input checked="checked" id="pile_status_piling" name="pile[status]" type="radio" value="piling">
+              playing<input id="pile_status_playing" name="pile[status]" type="radio" value="playing">
+              done<input id="pile_status_done" name="pile[status]" type="radio" value="done">
+
+              <p>
+                <input name="commit" type="submit" value="Create Pile">
+              </p>
+
+            </form>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -24,23 +24,21 @@ POG.Piles = React.createClass
   render: ->
     pileNodes = @state.data.map ((pile) ->
       platformNodes = pile.platforms.map (platform) ->
-        `<div className="inline">[{platform.name}]</div>`
+        `<div className="badge platform-badge">{platform.name}</div>`
       listClassName = do ->
-        'list-group-item clearfix'
-        ###
+        'pile-list list-group-item clearfix ' +
         switch pile.status
           when 0 then 'bg-piling'
           when 1 then 'bg-playing'
           when 2 then 'bg-done'
-        ###
 
       `<li className={listClassName} onClick={this.onClick}>
         <div className="pull-left">
-          <h4 className="list-group-item-heading">
+          <div className="list-group-item-heading">
             {platformNodes}
-            {pile.content.name}
-          </h4>
-          <p className="list-group-item-text">{pile.memo}</p>
+            <span className="pile-title">{pile.content.name}</span>
+          </div>
+          <p className="pile-memo list-group-item-text">{pile.memo}</p>
         </div>
 
         <div className="pull-right">
