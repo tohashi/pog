@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <title>pog</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
@@ -9,34 +10,40 @@
 
 <header>
   <div data-component="navbar" class="clearfix white bg-dark-gray">
-    <div class="left">
-      <div class="bold nav mobile-nav-table nav-big nav-dark">
-        <a href="#">pog</a>
+    <div class="container">
+      <div class="left">
+        <div class="bold nav mobile-nav-table nav-big nav-dark">
+          <%= link_to 'pog', root_path %>
+        </div>
       </div>
-    </div>
-    <div class="right">
-      <div class="bold nav nav-big nav-dark">
-        <% if @user.guest? %>
-          <% #TODO twitterのボタン？ %>
-          <%= link_to 'Login', '/auth/twitter' %>
-        <% else %>
-          <%= link_to @user.name, logout_path %>
-        <% end %>
+      <div class="right">
+        <div class="bold nav nav-big nav-dark">
+          <% if @user.guest? %>
+            <% #TODO twitterのボタン？ %>
+            <%= link_to 'Login', '/auth/twitter' %>
+          <% else %>
+            <%= link_to "@#{@user.name}", logout_path %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 </header>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
 
 <footer>
   <div class="center bg-light-gray">
-    <div class="h5 bold nav mobile-nav-table nav-small bg-light-gray rounded absolute-center">
-      <a href="/">Home</a>
-      <span class="nav-item"> | </span>
-      <a href="/"></a>
+    <div class="container">
+      <div class="h5 bold nav mobile-nav-table nav-small bg-light-gray rounded absolute-center">
+        <a href="/">About</a>
+        <span class="nav-item"> | </span>
+        <a href="/">Contact</a>
+      </div>
+      <p>Copyright</p>
     </div>
-    <p>Copyright</p>
   </div>
 </footer>
 

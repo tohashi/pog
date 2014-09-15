@@ -14,4 +14,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_by_uid(auth)
+    user = find_by(provider: auth['provider'], uid: auth['uid'])
+    if user.name != auth['info']['nickname']
+      user.save! do |user|
+        user.name = auth['info']['nickname']
+      end
+    end
+    user
+  end
+
 end

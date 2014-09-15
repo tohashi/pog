@@ -1,14 +1,21 @@
-<% if !@user.guest? %>
-  <%= link_to('pile', piles_path) %>
-<% end %>
+<div class="center">
+  <h1>pog</h1>
+  <p>プレイ中・積み中のゲームを記録しておく事ができます。</p>
+  <% if !@user.guest? %>
+    <a href="#!" class="button button-big button-blue">pile</a>
+  <% end %>
+</div>
 
-<%= @user.name %>
-<% if @user.guest? %>
-  <p>積みゲーの記録をつける</p>
-<% else %>
+<% if false %>
   <%= link_to 'Delete account', delete_account_path(@user.id), method: :delete %>
 <% end %>
 
+
+<div class="nav mobile-nav-table nav-tabs">
+  <a href="#!" class="active">24h</a>
+  <a href="#!">1week</a>
+  <a href="#!">Total</a>
+</div>
 
 <h5>60min</h5>
 <ul>
