@@ -3,12 +3,23 @@
 POG.Modal = React.createClass
   displayName: 'Modal'
 
+  handleClick: ->
+    @props.handleClick
+      content_name: $('input[name="content_name"]').val()
+      platform_names: $('input[name="platform_names"]').val()
+      memo: $('textarea[name="memo"]').val()
+      status: $('select[name="status"]').val()|0
+
   render: ->
+    title = switch (@props.action)
+      when 'Add' then 'Add New'
+      when 'Edit' then 'Edit'
+
     `<div className="modal-dialog">
       <div className="modal-content">
         <div className="modal-header">
           <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-          <h4 className="modal-title">Add New</h4>
+          <h4 className="modal-title">{title}</h4>
         </div>
         <div className="modal-body">
 
@@ -19,7 +30,7 @@ POG.Modal = React.createClass
             </div>
             <div className="form-group">
               <label>Platform(カンマ区切りで複数指定)</label>
-              <input className="form-control" name="platform_names" type="text" placeholder="PS4,3DS,Steam" />
+              <input className="form-control" name="platform_names" type="text" placeholder="PS4, 3DS, Steam, iOS..." />
             </div>
 
             <div className="form-group">
@@ -29,22 +40,18 @@ POG.Modal = React.createClass
 
             <div className="form-group">
               <label>Status</label><br />
-              <label className="radio-inline">
-                <input type="radio" name="inlineRadioOptions" value="piling" checked="checked" /> 積み
-              </label>
-              <label className="radio-inline">
-                <input type="radio" name="inlineRadioOptions" value="playing" /> プレイ中
-              </label>
-              <label className="radio-inline">
-                <input type="radio" name="inlineRadioOptions" value="done" /> Done
-              </label>
+              <select class="form-control" name="status">
+                <option value="0">積んだ</option>
+                <option value="1">プレイ中</option>
+                <option value="2">Done</option>
+              </select>
             </div>
           </form>
 
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" className="btn btn-primary">Add</button>
+          <button type="button" className="btn btn-primary" onClick={this.handleClick}>{this.props.action}</button>
         </div>
       </div>
     </div>`

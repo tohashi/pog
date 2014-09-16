@@ -5,7 +5,8 @@ class Pile < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :platform_ids, presence: true
-  validates :memo, presence: true
+  validates :memo, length: (0..40)
+  validates :status, presence: true
 
   serialize :platform_ids, Array
 

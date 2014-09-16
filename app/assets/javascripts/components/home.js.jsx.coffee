@@ -3,11 +3,40 @@ POG.Home = React.createClass
   displayName: 'Home'
 
   getInitialState: ->
+    action: 'Add'
     data: []
+    piles: []
 
-  onClick: (e) ->
+  handleClickAdd: (e) ->
     e.preventDefault()
-    $('.js-new-modal').modal()
+    @setState action: 'Add'
+    @modal()
+
+  handleClickPile: (data) ->
+    @setState action: 'Edit'
+    @modal()
+
+  handleClickModal: (data) ->
+    url = '/api/pile'
+
+    $.ajax
+      url: url
+      type: 'post'
+      data: data
+      dataType: 'json'
+      success: (data) =>
+        @fetchPiles => @modal 'hide'
+
+  fetchPiles: (done) ->
+    $.ajax
+      url: '/api/pile',
+      dataType: 'json'
+      success: (data) =>
+        @setState piles: data
+        done?()
+
+  modal: (options = null)->
+    $('.js-modal').modal(options)
 
   render: ->
     `<div>
@@ -15,11 +44,15 @@ POG.Home = React.createClass
         <h1 className="pog-logo aldrich">pog</h1>
         <p>積みゲーを記録・共有できるWebサービス</p>
         <p>
-          <a href="#" className="btn btn-primary btn-lg" onClick={this.onClick}>Add New</a>
+          <a href="#" className="btn btn-primary btn-lg" onClick={this.handleClickAdd}>Add New</a>
         </p>
       </div>
 
-      <POG.Piles url="/api/pile" />
+      <POG.Piles
+        data={this.state.piles}
+        fetch={this.fetchPiles}
+        handleClick={this.handleClickPile}
+      />
 
       <h5>Ranking(24h)</h5>
       <POG.Ranking url="/api/ranking/day" />
@@ -27,7 +60,10 @@ POG.Home = React.createClass
       <h5>Ranking(total)</h5>
       <POG.Ranking url="/api/ranking" />
 
-      <div className="js-edit-modal js-new-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <POG.Modal />
+      <div className="js-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <POG.Modal
+          action={this.state.action}
+          handleClick={this.handleClickModal}
+        />
       </div>
     </div>`

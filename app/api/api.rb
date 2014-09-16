@@ -124,7 +124,8 @@ class API < Grape::API
         user_id: current_user.id,
         content_id: content.id,
         platform_ids: platform_ids,
-        memo: params[:memo]
+        memo: params[:memo],
+        status: params[:status]
       })
 
       if new_pile.save
