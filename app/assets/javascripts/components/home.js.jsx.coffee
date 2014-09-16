@@ -26,4 +26,8 @@ POG.Home = React.createClass
 
       <h5>Ranking(total)</h5>
       <POG.Ranking url="/api/ranking" />
+
+      <div className="js-edit-modal js-new-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <POG.Modal />
+      </div>
     </div>`
