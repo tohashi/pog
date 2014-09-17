@@ -37,7 +37,7 @@ POG.Piles = React.createClass
     .sort (a, b) ->
       b.id - a.id
 
-    pileNodes = displayPiles.map (pile) =>
+    pileNodes = displayPiles.map(((pile) =>
       platformNodes = pile.platforms.map (platform) ->
         `<div className="badge platform-badge">{platform.name}</div>`
       listClassName = do ->
@@ -60,6 +60,7 @@ POG.Piles = React.createClass
           <p className="list-group-item-text">{pile.last_updated} ago</p>
         </div>
       </li>`
+    ).bind @)
 
     `<div className="text-right">
       <ul className="list-inline">
