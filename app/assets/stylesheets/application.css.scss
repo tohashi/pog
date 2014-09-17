@@ -4,6 +4,13 @@ body { padding-top: 60px; }
 @import "bootswatch/cyborg/bootswatch";
 @import url(http://fonts.googleapis.com/css?family=Aldrich);
 
+$color-piling: #009495;
+$color-piling-dark: #007475;
+$color-playing: #ac0479;
+$color-playing-dark: #8c0459;
+$color-done: #cfa600;
+$color-done-dark: #af8600;
+
 .pog-logo {
     font-size: 52px;
 }
@@ -24,15 +31,46 @@ body { padding-top: 60px; }
 }
 
 .bg-piling {
-    background-color: #009495;
+    background-color: $color-piling;
 }
 
 .bg-playing {
-    background-color: #ac0479;
+    background-color: $color-playing;
 }
 
 .bg-done {
-    background-color: #cfa600;
+    background-color: $color-done;
+}
+
+.btn-piling {
+    background-color: $color-piling;
+    color: #fff;
+    &:hover {
+        background-color: $color-piling-dark;
+    }
+}
+
+.btn-playing {
+    background-color: $color-playing;
+    color: #fff;
+    &:hover {
+        background-color: $color-playing-dark;
+    }
+}
+
+.btn-done {
+    background-color: $color-done;
+    color: #fff;
+    &:hover {
+        background-color: $color-done-dark;
+    }
+}
+
+.disable {
+    background-color: $gray-dark !important;
+    &:hover {
+        background-color: $gray-darker !important;
+    }
 }
 
 .pile-title {

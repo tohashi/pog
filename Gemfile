@@ -51,6 +51,7 @@ gem 'grape'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'bootswatch-rails'
+gem 'underscore-rails'
 
 group :development, :test do
   gem 'rspec-rails'
