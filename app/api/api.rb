@@ -158,7 +158,6 @@ class API < Grape::API
       pile = Pile.find(params[:id])
       content = get_content(params[:content_name])
       platform_ids = get_platform_ids(params[:platform_names])
-
       pile_params = {
         content_id: content.id,
         platform_ids: platform_ids,
@@ -172,12 +171,19 @@ class API < Grape::API
         nil
       end
     end
-
   end
 
   resource :content do
-    get do
-      Content.all
+    params do
+      requires :id, type: Integer
+    end
+
+    desc 'returns content'
+    get ':id' do
+      {
+        content: Content.find(params[:id]),
+        nearly_rankings: Content.get_nearly_content_rankings(params[:id])
+      }
     end
   end
 end

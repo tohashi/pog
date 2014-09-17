@@ -47,7 +47,7 @@ POG.Piles = React.createClass
           when 1 then 'bg-playing'
           when 2 then 'bg-done'
 
-      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.id}>
+      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.id} data-content-id={pile.content.id}>
         <div className="pull-left">
           <div className="list-group-item-heading">
             {platformNodes}

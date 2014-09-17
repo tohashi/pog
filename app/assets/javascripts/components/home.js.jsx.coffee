@@ -58,6 +58,14 @@ POG.Home = React.createClass
         @setState piles: data
         done?()
 
+  fetchContent: (id, done) ->
+    $.ajax
+      url: "/api/content/#{id}",
+      dataType: 'json'
+      success: (data) =>
+        @setState content: data
+        done?()
+
   modal: (options = null)->
     $('.js-modal').modal(options)
 
