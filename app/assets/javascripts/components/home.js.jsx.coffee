@@ -71,7 +71,7 @@ POG.Home = React.createClass
 
   render: ->
     `<div>
-      <div className="text-center">
+      <div className="text-center top-area">
         <h1 className="pog-logo aldrich">pog</h1>
         <p>積みゲーを記録・共有できるWebサービス</p>
         <p>

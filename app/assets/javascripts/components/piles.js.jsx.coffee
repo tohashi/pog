@@ -61,7 +61,7 @@ POG.Piles = React.createClass
         </div>
       </li>`
 
-    `<div>
+    `<div className="text-right">
       <ul className="list-inline">
         <li><button type="button" className="btn btn-piling" onClick={this.handleClickBtn} data-pile-status="0">積んだ</button></li>
         <li><button type="button" className="btn btn-playing" onClick={this.handleClickBtn} data-pile-status="1">プレイ中</button></li>

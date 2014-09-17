@@ -19,11 +19,17 @@ $color-done-dark: #af8600;
     font-family: 'Aldrich', sans-serif;
 }
 
+.top-area {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $gray-darker;
+}
+
 .footer {
     padding-top: 40px;
     padding-bottom: 40px;
     margin-top: 100px;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid $gray-darker;
 }
 
 .form-control {
