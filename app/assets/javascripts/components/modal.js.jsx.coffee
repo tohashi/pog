@@ -10,10 +10,13 @@ POG.Modal = React.createClass
       memo: $('textarea[name="memo"]').val()
       status: $('select[name="status"]').val()|0
 
+  componentDidMount: ->
+
   render: ->
     title = switch (@props.action)
       when 'Add' then 'Add New'
       when 'Edit' then 'Edit'
+
 
     `<div className="modal-dialog">
       <div className="modal-content">

@@ -8,7 +8,8 @@ POG.Piles = React.createClass
 
   handleClick: (e) ->
     e.preventDefault()
-    @props.handleClick()
+    pileId = $(e.currentTarget).data('pileId')
+    @props.handleClick(pileId)
 
   render: ->
     pileNodes = @props.data.map ((pile) ->
@@ -21,7 +22,7 @@ POG.Piles = React.createClass
           when 1 then 'bg-playing'
           when 2 then 'bg-done'
 
-      `<li className={listClassName} onClick={this.handleClick}>
+      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.id}>
         <div className="pull-left">
           <div className="list-group-item-heading">
             {platformNodes}

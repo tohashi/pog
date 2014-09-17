@@ -4,24 +4,47 @@ POG.Home = React.createClass
 
   getInitialState: ->
     action: 'Add'
-    data: []
+    pileId: null
     piles: []
+    contentName: ''
+    platformNames: ''
+    memo: ''
+    status: 0
 
   handleClickAdd: (e) ->
     e.preventDefault()
-    @setState action: 'Add'
+    @setState
+      action: 'Add'
+      pileId: null
+      contentName: ''
+      platformNames: ''
+      memo: ''
+      status: 0
     @modal()
+    $('input[name="content_name"]').val(@state.contentName)
 
-  handleClickPile: (data) ->
-    @setState action: 'Edit'
+  handleClickPile: (pileId) ->
+    @setState
+      action: 'Edit'
+      pileId: pileId
+      contentName: 'test'
+      platformNames: 'test'
+      memo: ''
+      status: 0
     @modal()
+    $('input[name="content_name"]').val(@state.contentName)
 
   handleClickModal: (data) ->
-    url = '/api/pile'
+    if @state.action is 'Add'
+      url = '/api/pile'
+      type = 'post'
+    else
+      url = "/api/pile/#{@state.pileId}"
+      type = 'put'
 
     $.ajax
       url: url
-      type: 'post'
+      type: type
       data: data
       dataType: 'json'
       success: (data) =>
@@ -50,8 +73,8 @@ POG.Home = React.createClass
 
       <POG.Piles
         data={this.state.piles}
-        fetch={this.fetchPiles}
         handleClick={this.handleClickPile}
+        fetch={this.fetchPiles}
       />
 
       <h5>Ranking(24h)</h5>
@@ -62,8 +85,13 @@ POG.Home = React.createClass
 
       <div className="js-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <POG.Modal
-          action={this.state.action}
           handleClick={this.handleClickModal}
+          pileId={this.state.pileId}
+          action={this.state.action}
+          contentName={this.state.contentName}
+          platformNames={this.state.platformNames}
+          memo={this.state.memo}
+          status={this.state.status}
         />
       </div>
     </div>`

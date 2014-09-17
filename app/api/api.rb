@@ -24,6 +24,35 @@ class API < Grape::API
 
       user
     end
+
+    # FIXME 命名
+    def get_content(name)
+      content = Content.find_by(name: name)
+      unless content
+        content = Content.new(:name => name)
+        content.save
+      end
+      content
+    end
+
+    def get_platform_ids(names)
+      ids = []
+      names.split(',').each do |name|
+        name.strip!
+        next if name.empty?
+
+        platform = Platform.find_by(name: name)
+        unless platform
+          platform = Platform.new(:name => name)
+          platform.save
+          # TODO 失敗時
+        end
+        ids.push(platform.id)
+      end
+
+      ids
+    end
+
   end
 
   resource :user do
@@ -37,14 +66,14 @@ class API < Grape::API
     end
 
     params do
-      requires :user_id, type: Integer
+      requires :id, type: Integer
     end
 
     desc 'returns user'
-    route_param :user_id do
+    route_param :id do
       get do
         begin
-          User.find(params[:user_id])
+          User.find(params[:id])
         rescue ActiveRecord::RecordNotFound
           {}
         end
@@ -86,7 +115,6 @@ class API < Grape::API
       end
     end
 
-
     params do
       requires :content_name, type: String
       requires :platform_names, type: String
@@ -94,31 +122,12 @@ class API < Grape::API
       optional :memo, type: String
     end
 
+    desc 'create pile'
     post do
-      content_name = params[:content_name]
-      platform_names = params[:platform_names].split(',')
-
       # TODO transaction
       # TODO find_or_create
-      content = Content.find_by(name: content_name)
-      unless content
-        content = Content.new(:name => content_name)
-        content.save
-      end
-
-      platform_ids = []
-      platform_names.each do |platform_name|
-        platform_name.strip!
-        next if platform_name.empty?
-
-        platform = Platform.find_by(name: platform_name)
-        unless platform
-          platform = Platform.new(:name => platform_name)
-          platform.save
-          # TODO 失敗時
-        end
-        platform_ids.push(platform.id)
-      end
+      content = get_content(params[:content_name])
+      platform_ids = get_platform_ids(params[:platform_names])
 
       new_pile = Pile.new({
         user_id: current_user.id,
@@ -134,6 +143,36 @@ class API < Grape::API
         nil
       end
     end
+
+    params do
+      requires :id, type: Integer
+      requires :content_name, type: String
+      requires :platform_names, type: String
+      requires :status, type: Integer
+      requires :memo, type: String
+    end
+
+    desc 'update pile'
+    put ':id' do
+      # TODO auth
+      pile = Pile.find(params[:id])
+      content = get_content(params[:content_name])
+      platform_ids = get_platform_ids(params[:platform_names])
+
+      pile_params = {
+        content_id: content.id,
+        platform_ids: platform_ids,
+        memo: params[:memo],
+        status: params[:status]
+      }
+
+      if pile.update(pile_params)
+        pile
+      else
+        nil
+      end
+    end
+
   end
 
   resource :content do
