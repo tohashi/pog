@@ -10,13 +10,26 @@ POG.Modal = React.createClass
       memo: $('textarea[name="memo"]').val()
       status: $('select[name="status"]').val()|0
 
-  componentDidMount: ->
-
   render: ->
     title = switch (@props.action)
       when 'Add' then 'Add New'
       when 'Edit' then 'Edit'
 
+    nearlyRankingsNodes = do =>
+      return unless @props.nearlyRankings.length
+
+      rankingNodes = @props.nearlyRankings.map (ranking) =>
+        `<li className="list-group-item">
+          <span className="badge">{ranking.count}</span>
+          {ranking.content.name}
+        </li>`
+
+      `<div>
+        <h5>このゲームを積んだ人はこんなゲームも積んでいます</h5>
+        <ul className="list-group">
+          {rankingNodes}
+        </ul>
+      </div>`
 
     `<div className="modal-dialog">
       <div className="modal-content">
@@ -43,13 +56,15 @@ POG.Modal = React.createClass
 
             <div className="form-group">
               <label>Status</label><br />
-              <select class="form-control" name="status">
+              <select className="form-control" name="status">
                 <option value="0">積んだ</option>
                 <option value="1">プレイ中</option>
                 <option value="2">Done</option>
               </select>
             </div>
           </form>
+
+          {nearlyRankingsNodes}
 
         </div>
         <div className="modal-footer">

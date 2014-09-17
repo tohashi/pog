@@ -11,8 +11,10 @@ POG.Piles = React.createClass
 
   handleClick: (e) ->
     e.preventDefault()
-    pileId = $(e.currentTarget).data('pileId')
-    @props.handleClick(pileId)
+    $target = $(e.currentTarget)
+    pileId = $target.data('pileId')
+    contentId = $target.data('contentId')
+    @props.handleClick(pileId, contentId)
 
   handleClickBtn: (e) ->
     e.preventDefault()

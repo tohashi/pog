@@ -17,12 +17,10 @@ POG.Ranking = React.createClass
     @load()
 
   render: ->
-    rankingNodes = this.state.data.map (ranking) ->
-      content = ranking.content
-      url = "/contents/#{content.id}"
+    rankingNodes = @state.data.map (ranking) ->
       `<li className="list-group-item">
           <span className="badge">{ranking.count}</span>
-          {content.name}
+          {ranking.content.name}
         </li>`
 
     `<ul className="list-group">

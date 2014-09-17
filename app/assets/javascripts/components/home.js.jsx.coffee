@@ -6,33 +6,26 @@ POG.Home = React.createClass
     action: 'Add'
     pileId: null
     piles: []
-    contentName: ''
-    platformNames: ''
-    memo: ''
-    status: 0
+    content: {}
+    nearlyRankings: []
 
   handleClickAdd: (e) ->
     e.preventDefault()
     @setState
       action: 'Add'
       pileId: null
-      contentName: ''
-      platformNames: ''
-      memo: ''
-      status: 0
     @modal()
-    $('input[name="content_name"]').val(@state.contentName)
+    $('input[name="content_name"]').val('')
+    $('input[name="platform_names"]').val('')
+    $('textarea[name="memo"]').val('')
 
-  handleClickPile: (pileId) ->
+  handleClickPile: (pileId, contentId) ->
     @setState
       action: 'Edit'
       pileId: pileId
-      contentName: 'test'
-      platformNames: 'test'
-      memo: ''
-      status: 0
     @modal()
-    $('input[name="content_name"]').val(@state.contentName)
+    @fetchContent contentId, =>
+      $('input[name="content_name"]').val(@state.content.name)
 
   handleClickModal: (data) ->
     if @state.action is 'Add'
@@ -63,7 +56,9 @@ POG.Home = React.createClass
       url: "/api/content/#{id}",
       dataType: 'json'
       success: (data) =>
-        @setState content: data
+        @setState
+          content: data.content
+          nearlyRankings: data.nearly_rankings
         done?()
 
   modal: (options = null)->
@@ -96,10 +91,7 @@ POG.Home = React.createClass
           handleClick={this.handleClickModal}
           pileId={this.state.pileId}
           action={this.state.action}
-          contentName={this.state.contentName}
-          platformNames={this.state.platformNames}
-          memo={this.state.memo}
-          status={this.state.status}
+          nearlyRankings={this.state.nearlyRankings}
         />
       </div>
     </div>`
