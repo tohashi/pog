@@ -49,7 +49,7 @@ POG.Piles = React.createClass
           when 1 then 'bg-playing'
           when 2 then 'bg-done'
 
-      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.id} data-content-id={pile.content.id}>
+      `<li className={listClassName} onTouchEnd={this.handleClick} onClick={this.handleClick} data-pile-id={pile.id} data-content-id={pile.content.id}>
         <div className="pull-left">
           <div className="list-group-item-heading">
             {platformNodes}
@@ -64,8 +64,8 @@ POG.Piles = React.createClass
       </li>`
     ).bind @)
 
-    `<div className="text-right">
-      <ul className="list-inline">
+    `<div>
+      <ul className="list-inline text-center">
         <li><button type="button" className="btn btn-piling" onClick={this.handleClickBtn} data-pile-status="0">積んだ</button></li>
         <li><button type="button" className="btn btn-playing" onClick={this.handleClickBtn} data-pile-status="1">プレイ中</button></li>
         <li><button type="button" className="btn btn-done" onClick={this.handleClickBtn} data-pile-status="2">Done</button></li>
