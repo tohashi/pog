@@ -2,9 +2,6 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :piles, except: [:show]
-  resources :contents, only: [:show]
-
   get '/auth/:provider/callback' => 'sessions#callback'
   post '/auth/:provider/callback' => 'sessions#callback'
   get '/logout' => 'sessions#destroy'
