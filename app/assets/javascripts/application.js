@@ -19,5 +19,6 @@
 //
 //= require main
 //= require_tree ./components
-//= require_tree ./models
+//= require ./collections/base
+//= require_tree ./collections
 //= require_tree ./views

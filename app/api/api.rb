@@ -57,6 +57,20 @@ class API < Grape::API
       ids
     end
 
+    def format_pile(pile)
+      content = Content.find(pile.content_id)
+      platforms = []
+      pile.platform_ids.each do |platform_id|
+        platforms.push(Platform.find(platform_id))
+      end
+
+      pile.attributes.merge({
+        'last_updated' => time_ago_in_words(pile.updated_at),
+        'content' => content,
+        'platforms' => platforms
+      })
+    end
+
   end
 
   resource :user do
@@ -103,20 +117,7 @@ class API < Grape::API
     get do
       user = current_user
       piles = Pile.where(user_id: user.id)
-
-      piles.map do |pile|
-        content = Content.find(pile.content_id)
-        platforms = []
-        pile.platform_ids.each do |platform_id|
-          platforms.push(Platform.find(platform_id))
-        end
-
-        pile.attributes.merge({
-          'last_updated' => time_ago_in_words(pile.updated_at),
-          'content' => content,
-          'platforms' => platforms
-        })
-      end
+      piles.map {|pile| format_pile(pile)}
     end
 
     params do
@@ -142,7 +143,7 @@ class API < Grape::API
       })
 
       if new_pile.save
-        new_pile
+        format_pile(new_pile)
       else
         nil
       end
@@ -170,7 +171,7 @@ class API < Grape::API
       }
 
       if pile.update(pile_params)
-        pile
+        format_pile(pile)
       else
         nil
       end

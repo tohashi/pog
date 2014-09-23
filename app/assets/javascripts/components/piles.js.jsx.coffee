@@ -7,7 +7,7 @@ POG.Piles = React.createClass
     displayList: [0,1,2]
 
   componentDidMount: ->
-    @props.model.fetch()
+    @props.collection.fetch()
 
   handleClick: (e) ->
     e.preventDefault()
