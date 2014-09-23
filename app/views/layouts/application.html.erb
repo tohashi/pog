@@ -27,7 +27,7 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= "@#{@user.name}" %><span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><%= link_to 'Settings', root_path %></li>
+                <li><%= link_to 'Settings', settings_path %></li>
                 <li class="divider"></li>
                 <li><%= link_to 'Logout', logout_path %></li>
               </ul>
@@ -39,9 +39,7 @@
     </div>
   </div>
 
-  <div class="js-main-container container">
-    <%= yield %>
-  </div>
+  <%= yield %>
 
   <footer class="footer text-center">
     <div class="container">

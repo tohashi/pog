@@ -23,5 +23,4 @@ class Pile < ActiveRecord::Base
 
     piles.map {|pile| pile.content_id}
   end
-
 end

@@ -4,24 +4,23 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :check_logined
 
-  private
-    def check_logined
-      if session[:user_id]
-        begin
-          @user = User.find(session[:user_id])
-        rescue ActiveRecord::RecordNotFound
-          reset_session
-        end
-      end
-
-      unless @user
-        # guest
-        @user = guest_user
+  def check_logined
+    if session[:user_id]
+      begin
+        @user = User.find(session[:user_id])
+      rescue ActiveRecord::RecordNotFound
+        reset_session
       end
     end
 
-    def guest_user
-      User.guest.first
+    unless @user
+      # guest
+      @user = guest_user
     end
+  end
+
+  def guest_user
+    User.guest.first
+  end
 
 end

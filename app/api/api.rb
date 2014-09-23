@@ -19,10 +19,14 @@ class API < Grape::API
       end
 
       unless user
-        user = User.guest.first
+        user = guest_user
       end
 
       user
+    end
+
+    def guest_user
+      User.guest.first
     end
 
     # FIXME 命名
@@ -84,12 +88,12 @@ class API < Grape::API
   resource :ranking do
     desc 'returns ranking'
     get do
-      Content.get_content_rankings(Pile.get_content_ids)
+      Content.get_ranking(Pile.get_content_ids)
     end
 
     desc 'returns 24h ranking'
     get :day do
-      Content.get_content_rankings(Pile.get_content_ids(86400))
+      Content.get_ranking(Pile.get_content_ids(86400))
     end
   end
 
@@ -182,7 +186,7 @@ class API < Grape::API
     get ':id' do
       {
         content: Content.find(params[:id]),
-        nearly_rankings: Content.get_nearly_content_rankings(params[:id])
+        nearly_rankings: Content.get_nearly_ranking(params[:id])
       }
     end
   end

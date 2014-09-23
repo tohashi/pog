@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :piles
+  has_many :piles, :dependent => :destroy
 
   validates :name, presence: true
 
@@ -23,5 +23,4 @@ class User < ActiveRecord::Base
     end
     user
   end
-
 end

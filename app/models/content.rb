@@ -1,7 +1,9 @@
 class Content < ActiveRecord::Base
+  has_many :piles
+
   validates :name, presence: true
 
-  def self.get_content_rankings(content_ids, max = 10)
+  def self.get_ranking(content_ids, max = 10)
     content_ids = content_ids.group_by {|id| id}.sort_by {|ids| -ids[1].length}[0...max]
 
     content_ids.map do |content_id|
@@ -12,7 +14,7 @@ class Content < ActiveRecord::Base
     end
   end
 
-  def self.get_nearly_content_rankings(id)
+  def self.get_nearly_ranking(id)
 
     user_ids = Pile.where(content_id: id).map do |pile|
       user = User.find(pile.user_id)
@@ -25,7 +27,7 @@ class Content < ActiveRecord::Base
     end
     nearly_pile_ids.flatten!.uniq!
 
-    get_content_rankings(nearly_pile_ids, 3)
+    get_ranking(nearly_pile_ids, 3)
   end
 
 end

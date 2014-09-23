@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback' => 'sessions#callback'
   post '/auth/:provider/callback' => 'sessions#callback'
-  get '/logout' => 'sessions#destroy'
-  get '/' => 'sessions#destroy'
 
+  get '/settings' => 'settings#index'
   delete '/user/:id' => 'home#destroy', as: :delete_account
+  get '/logout' => 'sessions#destroy'
 
   mount API => '/'
 
