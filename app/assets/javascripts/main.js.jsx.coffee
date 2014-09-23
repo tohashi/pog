@@ -1,5 +1,8 @@
 ###* @jsx React.DOM ###
-window.POG = {}
+window.POG =
+  Model: {}
+  Collection: {}
+  View: {}
 
 $ ->
   React.renderComponent \

@@ -8,6 +8,7 @@ POG.Home = React.createClass
     piles: []
     content: {}
     nearlyRankings: []
+    _piles: new POG.Collection.Pile onSet: (data) => @setState piles: data
 
   handleClickAdd: (e) ->
     e.preventDefault()
@@ -41,15 +42,7 @@ POG.Home = React.createClass
       data: data
       dataType: 'json'
       success: (data) =>
-        @fetchPiles => @modal 'hide'
-
-  fetchPiles: (done) ->
-    $.ajax
-      url: '/api/pile',
-      dataType: 'json'
-      success: (data) =>
-        @setState piles: data
-        done?()
+        @state._piles.fetch => @modal 'hide'
 
   fetchContent: (id, done) ->
     $.ajax
@@ -77,7 +70,7 @@ POG.Home = React.createClass
       <POG.Piles
         data={this.state.piles}
         handleClick={this.handleClickPile}
-        fetch={this.fetchPiles}
+        model={this.state._piles}
       />
 
       <h5>Ranking(24h)</h5>
