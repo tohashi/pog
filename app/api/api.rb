@@ -178,6 +178,12 @@ class API < Grape::API
   end
 
   resource :content do
+
+    desc 'returns all contents'
+    get do
+      Content.all
+    end
+
     params do
       requires :id, type: Integer
     end
