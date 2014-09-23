@@ -6,9 +6,6 @@ POG.Piles = React.createClass
   getInitialState: ->
     displayList: [0,1,2]
 
-  componentDidMount: ->
-    @props.collection.fetch()
-
   handleClick: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)

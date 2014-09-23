@@ -9,5 +9,8 @@ class POG.Collection.Base extends Backbone.Collection
     data[@paramName] = @toJSON()
     @parent.setState data
 
+  findById: (id) ->
+    this.findWhere(id: id)
+
   fetch: (done) ->
     super success: => done?()

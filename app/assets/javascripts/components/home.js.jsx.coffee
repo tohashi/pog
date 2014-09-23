@@ -3,52 +3,38 @@ POG.Home = React.createClass
   displayName: 'Home'
 
   getInitialState: ->
+    piles: []
+    contents: []
+    nearlyRankings: []
+
+    # app state
     action: 'Add'
     pileId: null
-    piles: []
-    content: {}
-    nearlyRankings: []
+    contentId: null
 
     collection:
       pile: new POG.Collection.Pile @, 'piles'
-      content: new POG.Collection.Pile @, 'contents'
+      content: new POG.Collection.Content @, 'contents'
+
+  componentDidMount: ->
+    @state.collection.pile.fetch()
+    @state.collection.content.fetch()
 
   handleClickAdd: (e) ->
     e.preventDefault()
     @setState
-      action: 'Add'
       pileId: null
+      contentId: null
+      action: 'Add'
+
     @modal()
-    $('input[name="content_name"]').val('')
-    $('input[name="platform_names"]').val('')
-    $('textarea[name="memo"]').val('')
 
   handleClickPile: (pileId, contentId) ->
     @setState
       action: 'Edit'
       pileId: pileId
+      contentId: contentId
     @modal()
-    @fetchContent contentId, =>
-      $('input[name="content_name"]').val(@state.content.name)
-
-  handleClickModal: (data) ->
-    if @state.action is 'Add'
-      @state.collection.pile.add(data).save {},
-        success: =>
-          @setState piles: []
-          @modal 'hide'
-      return
-    else
-      url = "/api/pile/#{@state.pileId}"
-      type = 'put'
-
-    $.ajax
-      url: url
-      type: type
-      data: data
-      dataType: 'json'
-      success: (data) =>
-        @state.collection.fetch => @modal 'hide'
 
   fetchContent: (id, done) ->
     $.ajax
@@ -56,11 +42,19 @@ POG.Home = React.createClass
       dataType: 'json'
       success: (data) =>
         @setState
-          content: data.content
           nearlyRankings: data.nearly_rankings
         done?()
 
-  modal: (options = null)->
+  handleClickModal: (data) ->
+    if @state.action is 'Add'
+      pile = @state.collection.pile.add(data)
+      pile.save {}, success: => @modal 'hide'
+    else
+      pile = @state.collection.pile.findById(@state.pileId)
+      pile?.set(data)
+      pile?.save {id: pile.id}, success: => @modal 'hide'
+
+  modal: (options = null) ->
     $('.js-modal').modal(options)
 
   render: ->
@@ -88,9 +82,12 @@ POG.Home = React.createClass
       <div className="js-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <POG.Modal
           handleClick={this.handleClickModal}
-          pileId={this.state.pileId}
           action={this.state.action}
           nearlyRankings={this.state.nearlyRankings}
+
+          collection={this.state.collection}
+          pileId={this.state.pileId}
+          contentId={this.state.contentId}
         />
       </div>
     </div>`
