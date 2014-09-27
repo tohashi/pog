@@ -33,5 +33,7 @@ module Pog
     config.paths.add "app/api", glob: "**/*.rb"
     config.autoload_paths += %W(#{config.root}/app/api/*)
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.react.addons = true
   end
 end

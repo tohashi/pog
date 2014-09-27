@@ -70,7 +70,7 @@ POG.Home = React.createClass
       <POG.Piles
         data={this.state.piles}
         handleClick={this.handleClickPile}
-        collection={this.state.collection.pile}
+        collection={this.state.collection}
       />
 
       <div className="js-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

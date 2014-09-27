@@ -4,14 +4,19 @@ POG.Piles = React.createClass
   displayName: 'Piles'
 
   getInitialState: ->
+    pileId: null
     displayList: [0,1,2]
 
   handleClick: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)
     pileId = $target.data('pileId')
-    contentId = $target.data('contentId')
-    @props.handleClick(pileId, contentId)
+    #@props.handleClick(pileId, contentId)
+    @setState
+      pileId: pileId
+
+  resetPileId: ->
+    @setState pileId: null
 
   handleClickBtn: (e) ->
     e.preventDefault()
@@ -37,41 +42,49 @@ POG.Piles = React.createClass
       b.id - a.id
 
     pileNodes = displayPiles.map(((pile) =>
+      editting = pile.id is @state.pileId
+
       platformNodes = pile.platforms.map (platform) ->
         `<div className="badge platform-badge">{platform.name}</div>`
-      listClassName = do ->
+
+      listClassName = do =>
         'pile-list list-group-item clearfix ' +
-        switch pile.status
+        (switch pile.status
           when 0 then 'bg-piling'
           when 1 then 'bg-playing'
-          when 2 then 'bg-done'
+          when 2 then 'bg-done') +
+        if editting then ' edit' else ''
 
-      `<li className={listClassName} onTouchEnd={this.handleClick} onClick={this.handleClick} data-pile-id={pile.id} data-content-id={pile.content.id}>
-        <div className="pull-left">
-          <div className="list-group-item-heading">
-            {platformNodes}
-            <span className="pile-title">{pile.content.name}</span>
-          </div>
-          <p className="pile-memo list-group-item-text">{pile.memo}</p>
-        </div>
+      formNode = do (=>
+        `<POG.PileForm
+          collection={this.props.collection}
+          pile={pile}
+          action="edit"
+          edittingId={this.state.pileId}
+          resetPileId={this.resetPileId}
+        />`
+      ).bind @
 
-        <div className="pull-right">
-          <p className="pile-date list-group-item-text">{pile.last_updated} ago</p>
-          <div className="pile-edit-btn btn-group">
-            <button type="button" className="btn btn-danger">Action</button>
-            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-              <span className="caret"></span>
-              <span className="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul className="dropdown-menu" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li className="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </div>
-        </div>
+      pileNode = do (=>
+        unless editting
+          `<div>
+            <div className="pull-left">
+              <div className="list-group-item-heading">
+                {platformNodes}
+                <span className="pile-title">{pile.content.name}</span>
+              </div>
+              <p className="pile-memo list-group-item-text">{pile.memo}</p>
+            </div>
+
+            <div className="pull-right">
+              <p className="pile-date list-group-item-text">{pile.last_updated} ago</p>
+            </div>
+          </div>`
+      ).bind @
+
+      `<li className={listClassName} onTouchEnd={this.handleClick} onClick={this.handleClick} data-pile-id={pile.id}>
+        {pileNode}
+        {formNode}
       </li>`
     ).bind @)
 
