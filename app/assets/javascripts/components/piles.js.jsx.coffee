@@ -56,17 +56,39 @@ POG.Piles = React.createClass
         </div>
 
         <div className="pull-right">
-          <p className="list-group-item-text">{pile.last_updated} ago</p>
+          <p className="pile-date list-group-item-text">{pile.last_updated} ago</p>
+          <div className="pile-edit-btn btn-group">
+            <button type="button" className="btn btn-danger">Action</button>
+            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+              <span className="caret"></span>
+              <span className="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul className="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li className="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
         </div>
       </li>`
     ).bind @)
 
     `<div>
-      <ul className="list-inline text-center">
-        <li><button type="button" className="btn btn-piling" onClick={this.handleClickBtn} data-pile-status="0">積んだ</button></li>
-        <li><button type="button" className="btn btn-playing" onClick={this.handleClickBtn} data-pile-status="1">プレイ中</button></li>
-        <li><button type="button" className="btn btn-done" onClick={this.handleClickBtn} data-pile-status="2">Done</button></li>
-      </ul>
+      <div className="pile-form-area">
+        <ul className="list-inline pull-left">
+          <li><button type="button" className="btn btn-piling" onClick={this.handleClickBtn} data-pile-status="0">積んだ</button></li>
+          <li><button type="button" className="btn btn-playing" onClick={this.handleClickBtn} data-pile-status="1">プレイ中</button></li>
+          <li><button type="button" className="btn btn-done" onClick={this.handleClickBtn} data-pile-status="2">Done</button></li>
+        </ul>
+
+        <div className="form-group pull-right">
+          <select className="form-control" name="status" value={this.state.status} onChange={this.handleChange}>
+            <option value="0">Newest</option>
+          </select>
+        </div>
+      </div>
 
       <ul className="list-group">
         {pileNodes}

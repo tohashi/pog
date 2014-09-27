@@ -73,12 +73,6 @@ POG.Home = React.createClass
         collection={this.state.collection.pile}
       />
 
-      <h5>Ranking(24h)</h5>
-      <POG.Ranking url="/api/ranking/day" />
-
-      <h5>Ranking(total)</h5>
-      <POG.Ranking url="/api/ranking" />
-
       <div className="js-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <POG.Modal
           handleClick={this.handleClickModal}

@@ -79,11 +79,29 @@ $color-done-dark: #af8600;
     }
 }
 
+.pile-form-area {
+    height: 50px;
+    margin: 0 1px;
+}
+
 .pile-title {
     margin-left: 4px;
     color: #fff;
     font-weight: 600;
     font-size: 24px;
+}
+
+.pile-date {
+    position: absolute;
+    right: 10px;
+    top: 4px;
+}
+
+.pile-edit-btn {
+    position: absolute;
+    right: 0px;
+    bottom: 8px;
+    margin-right: 6px;
 }
 
 .platform-badge {
