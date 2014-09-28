@@ -10,9 +10,13 @@ POG.PileForm = React.createClass
     status: 0
 
   handleClick: ->
-    pile = @props.collection.pile.findById(@props.pile.id)
-    pile?.set(_.pick @state, 'content_name', 'platform_names', 'memo', 'status')
-    pile?.save {id: pile.id}, success: => @close()
+    if @props.action is 'add'
+      pile = @props.collection.pile.add @state
+      pile.save {}, success: => @close()
+    else
+      pile = @props.collection.pile.findById(@props.pile.id)
+      pile?.set(_.pick @state, 'content_name', 'platform_names', 'memo', 'status')
+      pile?.save {id: pile.id}, success: => @close()
 
   handleChange: (e) ->
     data = {}
@@ -20,10 +24,11 @@ POG.PileForm = React.createClass
     @setState data
 
   componentWillReceiveProps: (nextProps) ->
-    return unless nextProps.pile.id is nextProps.edittingId
+    return if @props.pile and nextProps.pile.id isnt nextProps.edittingId
 
-    pile = @props.collection.pile.findById(@props.pile.id)
-    content = @props.collection.content.findById(@props.pile.content.id)
+    pile = @props.collection.pile.findById(@props.pile?.id)
+    content = @props.collection.content.findById(@props.pile?.content.id)
+
     @setState
       content_name: content?.get('name') or ''
       platform_names: _.pluck((pile?.get('platforms') or []), 'name').toString()
@@ -32,11 +37,13 @@ POG.PileForm = React.createClass
 
   close: ->
     setTimeout =>
-      @props.resetPileId()
+      @props.onClose()
     , 0
 
   render: ->
-    return `<div></div>` unless @props.pile.id is @props.edittingId
+    if (@props.pile and @props.pile.id isnt @props.edittingId) or
+       not @props.pile and @props.action isnt 'add'
+      return `<div></div>`
 
     `<div>
       <form role="form" accept-charset="UTF-8">

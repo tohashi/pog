@@ -5,18 +5,19 @@ POG.Piles = React.createClass
 
   getInitialState: ->
     pileId: null
+    action: 'edit'
     displayList: [0,1,2]
 
   handleClick: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)
     pileId = $target.data('pileId')
-    #@props.handleClick(pileId, contentId)
     @setState
       pileId: pileId
+      action: if pileId then 'edit' else 'add'
 
   resetPileId: ->
-    @setState pileId: null
+    @setState _.pick @getInitialState(), 'pileId', 'action'
 
   handleClickBtn: (e) ->
     e.preventDefault()
@@ -59,9 +60,9 @@ POG.Piles = React.createClass
         `<POG.PileForm
           collection={this.props.collection}
           pile={pile}
-          action="edit"
+          action={this.state.action}
           edittingId={this.state.pileId}
-          resetPileId={this.resetPileId}
+          onClose={this.resetPileId}
         />`
       ).bind @
 
@@ -82,11 +83,21 @@ POG.Piles = React.createClass
           </div>`
       ).bind @
 
-      `<li className={listClassName} onTouchEnd={this.handleClick} onClick={this.handleClick} data-pile-id={pile.id}>
+      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.id}>
         {pileNode}
         {formNode}
       </li>`
     ).bind @)
+
+    newPileNode = do (=>
+      `<li className="pile-list list-group-item clearfix" onClick={this.handleClick}>
+        <POG.PileForm
+          collection={this.props.collection}
+          action={this.state.action}
+          onClose={this.resetPileId}
+        />
+      </li>`
+    ).bind @
 
     `<div>
       <div className="pile-form-area">
@@ -105,5 +116,6 @@ POG.Piles = React.createClass
 
       <ul className="list-group">
         {pileNodes}
+        {newPileNode}
       </ul>
     </div>`
