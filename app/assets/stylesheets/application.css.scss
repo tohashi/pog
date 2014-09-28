@@ -94,7 +94,7 @@ $color-done-dark: #af8600;
 .pile-date {
     position: absolute;
     right: 10px;
-    top: 4px;
+    top: 6px;
 }
 
 .platform-badge {
@@ -105,15 +105,19 @@ $color-done-dark: #af8600;
 
 .pile-list {
     color: #eee;
-    height: 80px;
+    height: auto;
     transition: .1s linear;
-    &.edit {
-        height: 390px;
-    }
+    margin-bottom: -2px;
 }
 
 .pile-memo {
     margin-left: 4px;
+}
+
+.pile-btn-area {
+    button {
+        margin: 0 4px;
+    }
 }
 
 .fade-enter {

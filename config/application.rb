@@ -35,5 +35,7 @@ module Pog
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.react.addons = true
+
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end

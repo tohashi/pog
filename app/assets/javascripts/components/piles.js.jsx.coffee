@@ -1,5 +1,7 @@
 ###* @jsx React.DOM ###
 
+ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
+
 POG.Piles = React.createClass
   displayName: 'Piles'
 
@@ -114,8 +116,10 @@ POG.Piles = React.createClass
         </div>
       </div>
 
-      <ul className="list-group">
-        {newPileNode}
-        {pileNodes}
-      </ul>
+        <ul className="list-group">
+          <ReactCSSTransitionGroup transitionName="fade" component={React.DOM.div}>
+            {newPileNode}
+            {pileNodes}
+          </ReactCSSTransitionGroup>
+        </ul>
     </div>`
