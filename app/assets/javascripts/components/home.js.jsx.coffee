@@ -13,8 +13,8 @@ POG.Home = React.createClass
     contentId: null
 
     collection:
-      pile: new POG.Collection.Pile @, 'piles'
-      content: new POG.Collection.Content @, 'contents'
+      pile: new POG.Collection.Pile @
+      content: new POG.Collection.Content @
 
   componentDidMount: ->
     @state.collection.pile.fetch()

@@ -37,20 +37,20 @@ POG.Piles = React.createClass
     @setState displayList: displayList
 
   render: ->
-    displayPiles = @props.data.filter (pile) =>
-      _.contains @state.displayList, pile.status
+    displayPiles = @props.collection.pile.filter (pile) =>
+      _.contains(@state.displayList, pile.get('status')) and pile.get('platforms')
     .sort (a, b) ->
       b.id - a.id
 
     pileNodes = displayPiles.map(((pile) =>
-      editting = pile.id is @state.pileId
+      editting = pile.get('id') is @state.pileId
 
-      platformNodes = pile.platforms.map (platform) ->
+      platformNodes = pile.get('platforms').map (platform) ->
         `<div className="badge platform-badge">{platform.name}</div>`
 
       listClassName = do =>
         'pile-list list-group-item clearfix ' +
-        (switch pile.status
+        (switch pile.get('status')
           when 0 then 'bg-piling'
           when 1 then 'bg-playing'
           when 2 then 'bg-done') +
@@ -59,7 +59,7 @@ POG.Piles = React.createClass
       formNode = do (=>
         `<POG.PileForm
           collection={this.props.collection}
-          pile={pile}
+          pile={pile.toJSON()}
           action={this.state.action}
           edittingId={this.state.pileId}
           onClose={this.resetPileId}
@@ -72,18 +72,18 @@ POG.Piles = React.createClass
             <div className="pull-left">
               <div className="list-group-item-heading">
                 {platformNodes}
-                <span className="pile-title">{pile.content.name}</span>
+                <span className="pile-title">{pile.get('content').name}</span>
               </div>
-              <p className="pile-memo list-group-item-text">{pile.memo}</p>
+              <p className="pile-memo list-group-item-text">{pile.get('memo')}</p>
             </div>
 
             <div className="pull-right">
-              <p className="pile-date list-group-item-text">{pile.last_updated} ago</p>
+              <p className="pile-date list-group-item-text">{pile.get('last_updated')} ago</p>
             </div>
           </div>`
       ).bind @
 
-      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.id}>
+      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.get('id')}>
         {pileNode}
         {formNode}
       </li>`
@@ -115,7 +115,7 @@ POG.Piles = React.createClass
       </div>
 
       <ul className="list-group">
-        {pileNodes}
         {newPileNode}
+        {pileNodes}
       </ul>
     </div>`
