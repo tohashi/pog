@@ -15,7 +15,7 @@
 //= require underscore
 //= require bootstrap-sprockets
 //= require react
-//= require_tree ./vendor
+//= require backbone
 //
 //= require main
 //= require_tree ./components
