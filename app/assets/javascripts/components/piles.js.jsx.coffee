@@ -93,6 +93,10 @@ POG.Piles = React.createClass
 
     newPileNode = do (=>
       `<li className="pile-list list-group-item clearfix" onClick={this.handleClick}>
+        <div>
+          <span className="glyphicon glyphicon-plus"></span>
+          <span>Add New</span>
+        </div>
         <POG.PileForm
           collection={this.props.collection}
           action={this.state.action}

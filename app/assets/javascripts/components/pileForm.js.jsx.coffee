@@ -37,12 +37,6 @@ POG.PileForm = React.createClass
       memo: pile?.get('memo') or ''
       status: pile?.get('status') or 0
 
-  componentDidEnter: ->
-    debugger
-
-  componentDidLeave: ->
-    debugger
-
   close: ->
     setTimeout =>
       @props.onClose()
@@ -79,11 +73,8 @@ POG.PileForm = React.createClass
         </div>
       </form>
 
-      <span className="glyphicon glyphicon-remove"></span>
-
       <div className="pile-btn-area text-right">
-        <button type="button" className="btn btn-default" onClick={this.close}>Close</button>
-        <button type="button" className="btn btn-danger" onClick={this.close}>delete</button>
+        <button type="button" className="btn btn-default" onClick={this.close}>cancel</button>
         <button type="button" className="btn btn-primary" onClick={this.handleClick}>{this.props.action}</button>
       </div>
     </div>`
