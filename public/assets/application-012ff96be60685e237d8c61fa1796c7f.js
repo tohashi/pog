@@ -36222,10 +36222,7 @@ module.exports = warning;
       return React.DOM.div(null, 
       React.DOM.div({className: "text-center top-area"}, 
         React.DOM.h1({className: "pog-logo aldrich"}, "pog"), 
-        React.DOM.p(null, "積みゲーを記録・共有できるWebサービス"), 
-        React.DOM.p(null, 
-          React.DOM.a({href: "#", className: "btn btn-primary btn-lg", onClick: this.handleClickAdd}, "Add New")
-        )
+        React.DOM.p(null, "積みゲーを記録・共有できるWebサービス")
       ), 
 
       POG.Piles({
@@ -36335,12 +36332,6 @@ module.exports = warning;
         status: (pile != null ? pile.get('status') : void 0) || 0
       });
     },
-    componentDidEnter: function() {
-      debugger;
-    },
-    componentDidLeave: function() {
-      debugger;
-    },
     close: function() {
       return setTimeout((function(_this) {
         return function() {
@@ -36378,12 +36369,9 @@ module.exports = warning;
         )
       ), 
 
-      React.DOM.span({className: "glyphicon glyphicon-remove"}), 
-
       React.DOM.div({className: "pile-btn-area text-right"}, 
-        React.DOM.button({type: "button", className: "btn btn-default", onClick: this.close}, "Close"), 
-        React.DOM.button({type: "button", className: "btn btn-danger", onClick: this.close}, "delete"), 
-        React.DOM.button({type: "button", className: "btn btn-primary", onClick: this.handleClick}, this.props.action)
+        React.DOM.button({type: "button", className: "btn btn-default", onClick: this.close}, "Cancel"), 
+        React.DOM.button({type: "button", className: "btn btn-primary", onClick: this.handleClick}, "Ok")
       )
     );
     }
@@ -36501,6 +36489,10 @@ module.exports = warning;
       newPileNode = ((function(_this) {
         return function() {
           return React.DOM.li({className: "pile-list list-group-item clearfix", onClick: this.handleClick}, 
+        React.DOM.div({className: "text-center"}, 
+          React.DOM.span({className: "glyphicon glyphicon-plus"}), 
+          React.DOM.span(null, "Add New")
+        ), 
         POG.PileForm({
           collection: this.props.collection, 
           action: this.state.action, 

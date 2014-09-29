@@ -93,7 +93,7 @@ POG.Piles = React.createClass
 
     newPileNode = do (=>
       `<li className="pile-list list-group-item clearfix" onClick={this.handleClick}>
-        <div>
+        <div className="text-center">
           <span className="glyphicon glyphicon-plus"></span>
           <span>Add New</span>
         </div>

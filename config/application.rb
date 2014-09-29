@@ -37,6 +37,5 @@ module Pog
     config.react.addons = true
 
     config.assets.paths << "#{config.root}/vendor/assets/fonts"
-    config.assets.precompile +=  %w( *.woff *.eot *.svg *.ttf )
   end
 end

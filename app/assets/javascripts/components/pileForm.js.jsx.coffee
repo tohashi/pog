@@ -74,8 +74,8 @@ POG.PileForm = React.createClass
       </form>
 
       <div className="pile-btn-area text-right">
-        <button type="button" className="btn btn-default" onClick={this.close}>cancel</button>
-        <button type="button" className="btn btn-primary" onClick={this.handleClick}>{this.props.action}</button>
+        <button type="button" className="btn btn-default" onClick={this.close}>Cancel</button>
+        <button type="button" className="btn btn-primary" onClick={this.handleClick}>Ok</button>
       </div>
     </div>`
 

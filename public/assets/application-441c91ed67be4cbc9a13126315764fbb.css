@@ -368,8 +368,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("bootstrap/glyphicons-halflings-regular.eot");
-  src: url("bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("/assets/glyphicons-halflings-regular.eot");
+  src: url("/assets/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/assets/glyphicons-halflings-regular.woff") format("woff"), url("/assets/glyphicons-halflings-regular.ttf") format("truetype"), url("/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 
 /* line 25, /Users/tkm/github/pog/vendor/assets/stylesheets/bootstrap/_glyphicons.scss */
@@ -8216,47 +8216,47 @@ a.thumbnail.active {
 
 /* line 40, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .bg-piling {
-  background-color: #009495;
+  background-color: #cfa600 !important;
 }
 
 /* line 44, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .bg-playing {
-  background-color: #ac0479;
+  background-color: #009495 !important;
 }
 
 /* line 48, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .bg-done {
-  background-color: #cfa600;
+  background-color: #8c0449 !important;
 }
 
 /* line 52, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .btn-piling {
-  background-color: #009495;
+  background-color: #cfa600;
   color: #fff;
 }
 /* line 55, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .btn-piling:hover {
-  background-color: #007475;
+  background-color: #af8600;
 }
 
 /* line 60, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .btn-playing {
-  background-color: #ac0479;
+  background-color: #009495;
   color: #fff;
 }
 /* line 63, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .btn-playing:hover {
-  background-color: #8c0459;
+  background-color: #007475;
 }
 
 /* line 68, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .btn-done {
-  background-color: #cfa600;
+  background-color: #8c0449;
   color: #fff;
 }
 /* line 71, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .btn-done:hover {
-  background-color: #af8600;
+  background-color: #6c0429;
 }
 
 /* line 76, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
@@ -8273,8 +8273,12 @@ a.thumbnail.active {
   height: 50px;
   margin: 0 1px;
 }
+/* line 86, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+.pile-form-area .pull-left {
+  width: 75%;
+}
 
-/* line 88, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 91, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .pile-title {
   margin-left: 4px;
   color: #fff;
@@ -8282,54 +8286,55 @@ a.thumbnail.active {
   font-size: 24px;
 }
 
-/* line 95, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 98, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .pile-date {
   position: absolute;
   right: 10px;
   top: 6px;
 }
 
-/* line 101, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 104, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .platform-badge {
   display: inline;
   vertical-align: text-top;
   background-color: #555555;
 }
 
-/* line 107, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 110, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .pile-list {
   color: #eee;
+  background-color: #555555;
   height: auto;
   transition: .1s linear;
   margin-bottom: -2px;
 }
 
-/* line 114, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 118, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .pile-memo {
   margin-left: 4px;
 }
 
-/* line 119, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 123, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .pile-btn-area button {
   margin: 0 4px;
 }
 
-/* line 124, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 128, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .fade-enter {
   opacity: 0.01;
   transition: opacity .1s ease-in;
 }
-/* line 127, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 131, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .fade-enter.fade-enter-active {
   opacity: 1;
 }
 
-/* line 132, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 136, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .fade-leave {
   opacity: 1;
   transition: opacity .1s ease-out;
 }
-/* line 135, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
+/* line 139, /Users/tkm/github/pog/app/assets/stylesheets/application.css.scss */
 .fade-leave.fade-leave-active {
   opacity: 0.01;
 }
