@@ -1,7 +1,9 @@
 class Pile < ActiveRecord::Base
+  has_one :contents_pile
+  has_one :content, :through => :contents_pile
+  # has_and_belongs_to_many :platforms
+
   belongs_to :user
-  belongs_to :content
-  belongs_to :platform
 
   validates :user_id, presence: true
   validates :platform_ids, presence: true
@@ -21,6 +23,6 @@ class Pile < ActiveRecord::Base
       end
     end
 
-    piles.map {|pile| pile.content_id}
+    piles.map {|pile| pile.content.id}
   end
 end

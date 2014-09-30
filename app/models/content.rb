@@ -1,5 +1,6 @@
 class Content < ActiveRecord::Base
-  has_many :piles
+  has_many :contents_piles
+  has_many :piles, :through => :contents_piles
 
   validates :name, presence: true
 
@@ -29,5 +30,4 @@ class Content < ActiveRecord::Base
 
     get_ranking(nearly_pile_ids, 3)
   end
-
 end

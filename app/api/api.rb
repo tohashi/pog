@@ -58,7 +58,6 @@ class API < Grape::API
     end
 
     def format_pile(pile)
-      content = Content.find(pile.content_id)
       platforms = []
       pile.platform_ids.each do |platform_id|
         platforms.push(Platform.find(platform_id))
@@ -66,7 +65,7 @@ class API < Grape::API
 
       pile.attributes.merge({
         'last_updated' => time_ago_in_words(pile.updated_at),
-        'content' => content,
+        'content' => pile.content,
         'platforms' => platforms
       })
     end
@@ -136,7 +135,7 @@ class API < Grape::API
 
       new_pile = Pile.new({
         user_id: current_user.id,
-        content_id: content.id,
+        content: content,
         platform_ids: platform_ids,
         memo: params[:memo],
         status: params[:status]
@@ -164,7 +163,7 @@ class API < Grape::API
       content = get_content(params[:content_name])
       platform_ids = get_platform_ids(params[:platform_names])
       pile_params = {
-        content_id: content.id,
+        content: content,
         platform_ids: platform_ids,
         memo: params[:memo],
         status: params[:status]
