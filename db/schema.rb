@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140930155218) do
 
   create_table "piles", force: true do |t|
     t.integer  "user_id",                  null: false
+    t.integer  "content_id",               null: false
     t.string   "memo"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,5 +1,5 @@
 class RemoveContentIdFromPile < ActiveRecord::Migration
   def change
-    remove_column :piles, :content_id, :integer
+    # remove_column :piles, :content_id, :integer
   end
 end
