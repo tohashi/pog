@@ -21,3 +21,4 @@
 //= require_tree ./components
 //= require ./collections/base
 //= require_tree ./collections
+//= require_tree ./models

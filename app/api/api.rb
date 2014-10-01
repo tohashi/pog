@@ -75,10 +75,6 @@ class API < Grape::API
   resource :user do
     desc 'returns all users'
     get do
-      User.all
-    end
-
-    get :current do
       current_user
     end
 
@@ -111,11 +107,9 @@ class API < Grape::API
   end
 
   resource :pile do
-
     desc 'returns user pile'
     get do
-      user = current_user
-      piles = Pile.where(user_id: user.id)
+      piles = Pile.where(user_id: current_user.id)
       piles.map {|pile| format_pile(pile)}
     end
 

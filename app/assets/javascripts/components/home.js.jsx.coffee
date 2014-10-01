@@ -12,11 +12,14 @@ POG.Home = React.createClass
     pileId: null
     contentId: null
 
+    model:
+      user: new POG.Model.User @
     collection:
       pile: new POG.Collection.Pile @
       content: new POG.Collection.Content @
 
   componentDidMount: ->
+    @state.model.user.fetch()
     @state.collection.pile.fetch()
     @state.collection.content.fetch()
 
@@ -30,15 +33,27 @@ POG.Home = React.createClass
         done?()
 
   render: ->
+
+    mainContentNode = do (=>
+      if @state.model.user.isGuest()
+        `<div className="text-center">
+          <a href="/auth/twitter">
+            <button type="button" className="btn btn-primary btn-lg">
+              Sign in with Twitter
+            </button>
+          </a>
+        </div>`
+      else
+        `<POG.Piles
+          data={this.state.piles}
+          collection={this.state.collection}
+        />`
+    ).bind @
+
     `<div>
       <div className="text-center top-area">
         <h1 className="pog-logo aldrich">pog</h1>
-        <p>積みゲーを記録・共有できるWebサービス</p>
+        <p></p>
       </div>
-
-      <POG.Piles
-        data={this.state.piles}
-        collection={this.state.collection}
-      />
-
+      {mainContentNode}
     </div>`
