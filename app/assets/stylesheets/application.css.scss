@@ -88,6 +88,10 @@ $color-done-dark: #6c0429;
     }
 }
 
+.pile-heading {
+    margin-top: -8px;
+}
+
 .pile-title {
     margin-left: 4px;
     color: #fff;
@@ -110,18 +114,38 @@ $color-done-dark: #6c0429;
 .pile-list {
     color: #eee;
     background-color: $gray;
-    height: auto;
+    height: 81px;
     transition: .1s linear;
     margin-bottom: -2px;
+    &.new {
+        height: 42px;
+    }
+    &.form {
+        height: 390px;
+    }
+}
+
+.pile-text-content {
+    width: 88%;
 }
 
 .pile-memo {
-    margin-left: 4px;
+    font-size: 13px;
+    margin-top: -6px;
 }
 
 .pile-btn-area {
     button {
         margin: 0 4px;
+    }
+}
+
+.pile-icon-area {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    .glyphicon {
+        font-size: 20px;
     }
 }
 

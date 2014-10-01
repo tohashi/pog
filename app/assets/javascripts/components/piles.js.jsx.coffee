@@ -56,7 +56,13 @@ POG.Piles = React.createClass
           when 0 then 'bg-piling'
           when 1 then 'bg-playing'
           when 2 then 'bg-done') +
-        if editting then ' edit' else ''
+        if editting then ' form' else ''
+
+      btnClassName = do =>
+        (switch pile.get('status')
+          when 0 then 'btn btn-piling'
+          when 1 then 'btn btn-playing'
+          when 2 then 'btn btn-done')
 
       formNode = do (=>
         `<POG.PileForm
@@ -71,8 +77,8 @@ POG.Piles = React.createClass
       pileNode = do (=>
         unless editting
           `<div>
-            <div className="pull-left">
-              <div className="list-group-item-heading">
+            <div className="pile-text-content pull-left">
+              <div className="pile-heading list-group-item-heading">
                 {platformNodes}
                 <span className="pile-title">{pile.get('content').name}</span>
               </div>
@@ -81,22 +87,38 @@ POG.Piles = React.createClass
 
             <div className="pull-right">
               <p className="pile-date list-group-item-text">{pile.get('last_updated')} ago</p>
+
+              <div className="pile-icon-area">
+                <button type="button" className={btnClassName} onClick={this.handleClick}  data-pile-id={pile.get('id')}>
+                  <span className="glyphicon glyphicon-edit"></span>
+                </button>
+              </div>
             </div>
           </div>`
       ).bind @
 
-      `<li className={listClassName} onClick={this.handleClick} data-pile-id={pile.get('id')}>
+      `<li className={listClassName}>
         {pileNode}
         {formNode}
       </li>`
     ).bind @)
 
     newPileNode = do (=>
-      `<li className="pile-list list-group-item clearfix" onClick={this.handleClick}>
-        <div className="text-center">
-          <span className="glyphicon glyphicon-plus"></span>
-          <span>Add New</span>
-        </div>
+      pileClassName = 'pile-list list-group-item new clearfix'
+      titleNode = ''
+
+      if !@state.pileId and @state.action is 'add'
+        pileClassName += ' form'
+      else
+        titleNode = do (=>
+          `<div className="text-center" onClick={this.handleClick}>
+            <span className="glyphicon glyphicon-plus"></span>
+            <span>Add New</span>
+          </div>`
+        ).bind @
+
+      `<li className={pileClassName}>
+        {titleNode}
         <POG.PileForm
           collection={this.props.collection}
           action={this.state.action}
@@ -113,10 +135,13 @@ POG.Piles = React.createClass
           <li><button type="button" className="btn btn-done" onClick={this.handleClickBtn} data-pile-status="2">Done</button></li>
         </ul>
 
-        <div className="form-group pull-right">
-          <select className="form-control" name="status" value={this.state.status} onChange={this.handleChange}>
-            <option value="0">Newest</option>
-          </select>
+        <div className="btn-group pull-right">
+          <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Newest <span className="caret"></span>
+          </button>
+          <ul className="dropdown-menu" role="menu">
+            <li><a href="#">Newest</a></li>
+          </ul>
         </div>
       </div>
 
