@@ -15,19 +15,18 @@ class Content < ActiveRecord::Base
     end
   end
 
-  def self.get_nearly_ranking(id)
-
-    user_ids = Pile.where(content_id: id).map do |pile|
+  def self.get_nearly_contents(id)
+    # TODO has_namy through
+    nearly_content_ids = Content.find(id).piles.map do |pile|
       user = User.find(pile.user_id)
-      user.id
+      user.piles.map {|pile| pile.content.id}
     end
 
-    nearly_pile_ids = user_ids.map do |user_id|
-      piles = Pile.where("user_id = #{user_id} && content_id != #{id}")
-      piles.map {|pile| pile.content_id}
-    end
-    nearly_pile_ids.flatten!.uniq!
+    nearly_content_ids = nearly_content_ids.flatten.uniq.reject {|content_id| content_id == id}
+    content_list = nearly_content_ids.group_by {|id| id}.sort_by {|ids| -ids[1].length}[0...3]
 
-    get_ranking(nearly_pile_ids, 3)
+    content_list.map do |content|
+      find(content[0])
+    end
   end
 end

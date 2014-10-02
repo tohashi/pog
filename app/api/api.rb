@@ -182,12 +182,9 @@ class API < Grape::API
       requires :id, type: Integer
     end
 
-    desc 'returns content'
-    get ':id' do
-      {
-        content: Content.find(params[:id]),
-        nearly_rankings: Content.get_nearly_ranking(params[:id])
-      }
+    desc 'returns nearly content'
+    get 'nearly/:id' do
+      Content.get_nearly_contents(params[:id])
     end
   end
 end

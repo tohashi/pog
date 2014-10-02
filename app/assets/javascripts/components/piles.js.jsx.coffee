@@ -7,6 +7,7 @@ POG.Piles = React.createClass
 
   getInitialState: ->
     pileId: null
+    contentId: null
     action: 'edit'
     displayList: [0,1,2]
 
@@ -37,6 +38,13 @@ POG.Piles = React.createClass
       $target.removeClass('disable')
 
     @setState displayList: displayList
+
+  openModal: (e) ->
+    e.preventDefault()
+    $target = $(e.currentTarget)
+    contentId = $target.data('contentId')
+    @setState contentId: contentId
+    $('.modal').modal()
 
   render: ->
     displayPiles = @props.collection.pile.filter (pile) =>
@@ -77,7 +85,7 @@ POG.Piles = React.createClass
       pileNode = do (=>
         unless editting
           `<div>
-            <div className="pile-text-content pull-left">
+            <div className="pile-text-content pull-left" onClick={this.openModal} data-content-id={pile.get('content').id}>
               <div className="pile-heading list-group-item-heading">
                 {platformNodes}
                 <span className="pile-title">{pile.get('content').name}</span>
@@ -145,10 +153,16 @@ POG.Piles = React.createClass
         </div>
       </div>
 
-        <ul className="list-group">
-          <ReactCSSTransitionGroup transitionName="fade" component={React.DOM.div}>
-            {newPileNode}
-            {pileNodes}
-          </ReactCSSTransitionGroup>
-        </ul>
+      <ul className="list-group">
+        <ReactCSSTransitionGroup transitionName="fade" component={React.DOM.div}>
+          {newPileNode}
+          {pileNodes}
+        </ReactCSSTransitionGroup>
+      </ul>
+
+      <POG.Modal
+        contentId={this.state.contentId}
+        model={this.props.model}
+        collection={this.props.collection}
+      />
     </div>`
