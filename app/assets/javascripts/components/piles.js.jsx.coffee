@@ -85,7 +85,7 @@ POG.Piles = React.createClass
       pileNode = do (=>
         unless editting
           `<div>
-            <div className="pile-text-content pull-left" onClick={this.openModal} data-content-id={pile.get('content').id}>
+            <div className="pile-text-content pull-left" onClick={this.openModal} onTouchEnd={this.openModal} data-content-id={pile.get('content').id}>
               <div className="pile-heading list-group-item-heading">
                 {platformNodes}
                 <span className="pile-title">{pile.get('content').name}</span>
@@ -97,7 +97,7 @@ POG.Piles = React.createClass
               <p className="pile-date list-group-item-text">{pile.get('last_updated')} ago</p>
 
               <div className="pile-icon-area">
-                <button type="button" className={btnClassName} onClick={this.handleClick}  data-pile-id={pile.get('id')}>
+                <button type="button" className={btnClassName} onClick={this.handleClick} onTouchEnd={this.handleClick} data-pile-id={pile.get('id')}>
                   <span className="glyphicon glyphicon-edit"></span>
                 </button>
               </div>
@@ -119,7 +119,7 @@ POG.Piles = React.createClass
         pileClassName += ' form'
       else
         titleNode = do (=>
-          `<div className="text-center" onClick={this.handleClick}>
+          `<div className="text-center" onClick={this.handleClick} onTouchEnd={this.handleClick}>
             <span className="glyphicon glyphicon-plus"></span>
             <span>Add New</span>
           </div>`
