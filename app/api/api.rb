@@ -153,6 +153,16 @@ class API < Grape::API
         nil
       end
     end
+
+    params do
+      requires :id, type: Integer
+    end
+
+    desc 'destroy pile'
+    delete ':id' do
+      pile = Pile.find(params[:id])
+      pile.destroy
+    end
   end
 
   resource :content do

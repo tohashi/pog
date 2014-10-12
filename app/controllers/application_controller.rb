@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
     end
 
     # guest
-    user || User.guest.first
+    # user || User.guest.first
+    user || User.first
   end
 end
