@@ -10,23 +10,7 @@ class API < Grape::API
     end
 
     def current_user
-      if session[:user_id]
-        begin
-          user = User.find(session[:user_id])
-        rescue ActiveRecord::RecordNotFound
-          reset_session
-        end
-      end
-
-      unless user
-        user = guest_user
-      end
-
-      user
-    end
-
-    def guest_user
-      User.guest.first
+      ApplicationController.check_logined(session)
     end
 
     # FIXME 命名
