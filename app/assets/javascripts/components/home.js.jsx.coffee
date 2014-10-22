@@ -37,8 +37,8 @@ POG.Home = React.createClass
     ).bind @
 
     `<div>
-      <div className="text-center top-area">
-        <h1 className="pog-logo aldrich">pog</h1>
+      <div className="text-center l-mb10 l-pb10">
+        <h1 className="top-logo aldrich">pog</h1>
         <p></p>
       </div>
       {mainContentNode}

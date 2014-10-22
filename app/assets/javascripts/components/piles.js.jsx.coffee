@@ -32,10 +32,10 @@ POG.Piles = React.createClass
 
     if _.contains displayList, status
       displayList.splice(idx, 1)
-      $target.addClass('disable')
+      $target.addClass('is-disable')
     else
       displayList.push(status)
-      $target.removeClass('disable')
+      $target.removeClass('is-disable')
 
     @setState displayList: displayList
 
@@ -61,16 +61,16 @@ POG.Piles = React.createClass
       listClassName = do =>
         'pile-list list-group-item clearfix ' +
         (switch pile.get('status')
-          when 0 then 'bg-piling'
-          when 1 then 'bg-playing'
-          when 2 then 'bg-done') +
+          when 0 then 'is-piling'
+          when 1 then 'is-playing'
+          when 2 then 'is-done') +
         if editting then ' form' else ''
 
       btnClassName = do =>
         (switch pile.get('status')
-          when 0 then 'btn btn-piling'
-          when 1 then 'btn btn-playing'
-          when 2 then 'btn btn-done')
+          when 0 then 'btn is-piling'
+          when 1 then 'btn is-playing'
+          when 2 then 'btn is-done')
 
       formNode = do (=>
         `<POG.PileForm
@@ -94,9 +94,9 @@ POG.Piles = React.createClass
             </div>
 
             <div className="pull-right">
-              <p className="pile-date list-group-item-text">{pile.get('last_updated')} ago</p>
+              <p className="pile-date list-group-item-text l-abs">{pile.get('last_updated')} ago</p>
 
-              <div className="pile-icon-area">
+              <div className="pile-icon-area l-abs">
                 <button type="button" className={btnClassName} onClick={this.handleClick} onTouchEnd={this.handleClick} data-pile-id={pile.get('id')}>
                   <span className="glyphicon glyphicon-edit"></span>
                 </button>
@@ -138,9 +138,9 @@ POG.Piles = React.createClass
     `<div>
       <div className="pile-form-area">
         <ul className="list-inline pull-left">
-          <li><button type="button" className="btn btn-piling" onClick={this.handleClickBtn} data-pile-status="0">積んだ</button></li>
-          <li><button type="button" className="btn btn-playing" onClick={this.handleClickBtn} data-pile-status="1">プレイ中</button></li>
-          <li><button type="button" className="btn btn-done" onClick={this.handleClickBtn} data-pile-status="2">Done</button></li>
+          <li><button type="button" className="btn is-piling" onClick={this.handleClickBtn} data-pile-status="0">積んだ</button></li>
+          <li><button type="button" className="btn is-playing" onClick={this.handleClickBtn} data-pile-status="1">プレイ中</button></li>
+          <li><button type="button" className="btn is-done" onClick={this.handleClickBtn} data-pile-status="2">Done</button></li>
         </ul>
 
         <div className="btn-group pull-right">
