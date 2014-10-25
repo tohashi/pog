@@ -59,28 +59,28 @@ $color-done-dark: #6c0429;
     color: $white;
 }
 
-.is-piling {
-    background-color: $color-piling !important;
+.btn-piling {
+    background-color: $color-piling;
     &:hover {
         background-color: $color-piling-dark;
     }
 }
 
-.is-playing {
-    background-color: $color-playing !important;
+.btn-playing {
+    background-color: $color-playing;
     &:hover {
         background-color: $color-playing-dark;
     }
 }
 
-.is-done {
-    background-color: $color-done !important;
+.btn-done {
+    background-color: $color-done;
     &:hover {
         background-color: $color-done-dark;
     }
 }
 
-.is-disable {
+.btn-disable {
     background-color: $gray-dark !important;
     &:hover {
         background-color: $gray-darker !important;
@@ -99,6 +99,17 @@ $color-done-dark: #6c0429;
     &.form {
         height: 390px;
     }
+}
+.is-piling {
+    background-color: $color-piling !important;
+}
+
+.is-playing {
+    background-color: $color-playing !important;
+}
+
+.is-done {
+    background-color: $color-done !important;
 }
 
 .pile-form-area {

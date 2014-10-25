@@ -37,10 +37,6 @@ POG.PileForm = React.createClass
       memo: pile?.get('memo') or ''
       status: pile?.get('status') or 0
 
-  remove: ->
-    pile = @props.collection.pile.findById(@props.pile.id)
-    pile?.destroy success: => @close()
-
   close: ->
     setTimeout =>
       @props.onClose()
@@ -78,7 +74,6 @@ POG.PileForm = React.createClass
       </form>
 
       <div className="pile-btn-area text-right">
-        <button type="button" className="btn btn-danger" onClick={this.remove}>Remove</button>
         <button type="button" className="btn btn-default" onClick={this.close}>Cancel</button>
         <button type="button" className="btn btn-primary" onClick={this.handleClick}>Ok</button>
       </div>
