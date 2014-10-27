@@ -10,6 +10,7 @@ POG.Piles = React.createClass
     contentId: null
     action: 'edit'
     displayList: [0,1,2]
+    sortType: 'Newest'
 
   edit: (e) ->
     e.preventDefault()
@@ -46,6 +47,21 @@ POG.Piles = React.createClass
 
     @setState displayList: displayList
 
+  changeSortType: (e) ->
+    e.preventDefault()
+    $target = $(e.currentTarget)
+    @setState 'sortType': $target.data('sortType')
+
+  getDisplayPiles: ->
+    comparator = switch @state.sortType
+      when 'Newest'
+        (a, b) -> b.id - a.id
+      when 'Oldest'
+        (a, b) -> a.id - b.id
+    @props.collection.pile.filter (pile) =>
+      _.contains(@state.displayList, pile.get('status')) and pile.get('platforms')
+    .sort comparator
+
   openModal: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)
@@ -54,12 +70,7 @@ POG.Piles = React.createClass
     $('.modal').modal()
 
   render: ->
-    displayPiles = @props.collection.pile.filter (pile) =>
-      _.contains(@state.displayList, pile.get('status')) and pile.get('platforms')
-    .sort (a, b) ->
-      b.id - a.id
-
-    pileNodes = displayPiles.map(((pile) =>
+    pileNodes = @getDisplayPiles().map(((pile) =>
       editting = pile.get('id') is @state.pileId
 
       listClassName = do =>
@@ -122,6 +133,8 @@ POG.Piles = React.createClass
 
     `<div>
       <POG.Navi
+        sortType={this.state.sortType}
+        handleClickSort={this.changeSortType}
         handleClickBtn={this.toggleDisplay}
       />
 

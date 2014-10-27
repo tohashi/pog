@@ -23,6 +23,17 @@ POG.Navi = React.createClass
         </li>`
     ).bind @
 
+    dropdowns = do (->
+      for type in ['Newest', 'Oldest']
+        `<li>
+          <a
+            href="#"
+            onClick={this.props.handleClickSort}
+            data-sort-type={type}
+          >{type}</a>
+        </li>`
+    ).bind @
+
     `<div className="pile-form-area">
       <ul className="list-inline pull-left">
         {btns}
@@ -30,11 +41,10 @@ POG.Navi = React.createClass
 
       <div className="btn-group pull-right">
         <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          Newest <span className="caret"></span>
+          {this.props.sortType} <span className="caret"></span>
         </button>
         <ul className="dropdown-menu" role="menu">
-          <li><a href="#">Newest</a></li>
-          <li><a href="#">Oldest</a></li>
+          {dropdowns}
         </ul>
       </div>
     </div>`
