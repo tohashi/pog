@@ -1,6 +1,7 @@
 ###* @jsx React.DOM ###
 
 POG.Navi = React.createClass
+  displayName: 'Navi'
 
   render: ->
     btnDataList = [

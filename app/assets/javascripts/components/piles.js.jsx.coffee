@@ -11,7 +11,7 @@ POG.Piles = React.createClass
     action: 'edit'
     displayList: [0,1,2]
 
-  handleClick: (e) ->
+  edit: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)
     pileId = $target.data('pileId')
@@ -62,9 +62,6 @@ POG.Piles = React.createClass
     pileNodes = displayPiles.map(((pile) =>
       editting = pile.get('id') is @state.pileId
 
-      platformNodes = pile.get('platforms').map (platform) ->
-        `<div className="badge platform-badge">{platform.name}</div>`
-
       listClassName = do =>
         'pile-list list-group-item clearfix ' +
         (switch pile.get('status')
@@ -72,12 +69,6 @@ POG.Piles = React.createClass
           when 1 then 'is-playing'
           when 2 then 'is-done') +
         if editting then ' form' else ''
-
-      btnClassName = do =>
-        (switch pile.get('status')
-          when 0 then 'btn btn-piling'
-          when 1 then 'btn btn-playing'
-          when 2 then 'btn btn-done')
 
       formNode = do (=>
         `<POG.PileForm
@@ -91,28 +82,12 @@ POG.Piles = React.createClass
 
       pileNode = do (=>
         unless editting
-          `<div>
-            <div className="pile-text-content pull-left" onClick={this.openModal} onTouchEnd={this.openModal} data-content-id={pile.get('content').id}>
-              <div className="pile-heading list-group-item-heading">
-                {platformNodes}
-                <span className="pile-title">{pile.get('content').name}</span>
-              </div>
-              <p className="pile-memo list-group-item-text">{pile.get('memo')}</p>
-            </div>
-
-            <div className="pull-right">
-              <p className="pile-date list-group-item-text l-abs">{pile.get('last_updated')} ago</p>
-
-              <div className="pile-icon-area l-abs">
-                <button type="button" className={btnClassName} onClick={this.handleClick} onTouchEnd={this.handleClick} data-pile-id={pile.get('id')}>
-                  <span className="glyphicon glyphicon-edit"></span>
-                </button>
-                <button type="button" className={btnClassName} onClick={this.remove} onTouchEnd={this.remove} data-pile-id={pile.get('id')}>
-                  <span className="glyphicon glyphicon-remove"></span>
-                </button>
-              </div>
-            </div>
-          </div>`
+          `<POG.PileContent
+            pile={pile}
+            handleClickEdit={this.edit}
+            handleClickRemove={this.remove}
+            handleClickOpen={this.openModal}
+          />`
       ).bind @
 
       `<li className={listClassName}>
@@ -129,7 +104,7 @@ POG.Piles = React.createClass
         pileClassName += ' form'
       else
         titleNode = do (=>
-          `<div className="text-center" onClick={this.handleClick} onTouchEnd={this.handleClick}>
+          `<div className="text-center" onClick={this.edit} onTouchEnd={this.edit}>
             <span className="glyphicon glyphicon-plus"></span>
             <span>Add New</span>
           </div>`
