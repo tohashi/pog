@@ -29,7 +29,7 @@ POG.Piles = React.createClass
   resetPileId: ->
     @setState _.pick @getInitialState(), 'pileId', 'action'
 
-  handleClickBtn: (e) ->
+  toggleDisplay: (e) ->
     e.preventDefault()
 
     $target = $(e.currentTarget)
@@ -146,22 +146,9 @@ POG.Piles = React.createClass
     ).bind @
 
     `<div>
-      <div className="pile-form-area">
-        <ul className="list-inline pull-left">
-          <li><button type="button" className="btn btn-piling" onClick={this.handleClickBtn} data-pile-status="0">積んだ</button></li>
-          <li><button type="button" className="btn btn-playing" onClick={this.handleClickBtn} data-pile-status="1">プレイ中</button></li>
-          <li><button type="button" className="btn btn-done" onClick={this.handleClickBtn} data-pile-status="2">Done</button></li>
-        </ul>
-
-        <div className="btn-group pull-right">
-          <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            Newest <span className="caret"></span>
-          </button>
-          <ul className="dropdown-menu" role="menu">
-            <li><a href="#">Newest</a></li>
-          </ul>
-        </div>
-      </div>
+      <POG.Navi
+        handleClickBtn={this.toggleDisplay}
+      />
 
       <ul className="list-group">
         <ReactCSSTransitionGroup transitionName="fade" component={React.DOM.div}>
