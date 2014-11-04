@@ -4,6 +4,10 @@ class API < Grape::API
   prefix 'api'
   format :json
 
+  rescue_from :all do |e|
+    Rack::Response.new([ e.message ], 500).finish
+  end
+
   helpers do
     def session
       env[Rack::Session::Abstract::ENV_SESSION_KEY]
@@ -18,7 +22,7 @@ class API < Grape::API
       content = Content.find_by(name: name)
       unless content
         content = Content.new(:name => name)
-        content.save
+        content.save!
       end
       content
     end
@@ -32,7 +36,7 @@ class API < Grape::API
         platform = Platform.find_by(name: name)
         unless platform
           platform = Platform.new(:name => name)
-          platform.save
+          platform.save!
           # TODO 失敗時
         end
         ids.push(platform.id)
@@ -108,21 +112,20 @@ class API < Grape::API
     post do
       # TODO transaction
       # TODO find_or_create
-      content = get_content(params[:content_name])
-      platform_ids = get_platform_ids(params[:platform_names])
 
-      new_pile = Pile.new({
-        user_id: current_user.id,
-        content: content,
-        platform_ids: platform_ids,
-        memo: params[:memo],
-        status: params[:status]
-      })
+      ActiveRecord::Base.transaction do
+        content = get_content(params[:content_name])
+        platform_ids = get_platform_ids(params[:platform_names])
 
-      if new_pile.save
+        new_pile = Pile.new({
+          user_id: current_user.id,
+          content: content,
+          platform_ids: platform_ids,
+          memo: params[:memo],
+          status: params[:status]
+        })
+        new_pile.save!
         format_pile(new_pile)
-      else
-        nil
       end
     end
 
