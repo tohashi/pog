@@ -17,31 +17,14 @@ class API < Grape::API
       ApplicationController.check_logined(session)
     end
 
-    # FIXME 命名
-    def get_content(name)
-      content = Content.find_by(name: name)
-      unless content
-        content = Content.new(:name => name)
-        content.save!
-      end
-      content
-    end
-
     def get_platform_ids(names)
       ids = []
       names.split(',').each do |name|
         name.strip!
         next if name.empty?
-
-        platform = Platform.find_by(name: name)
-        unless platform
-          platform = Platform.new(:name => name)
-          platform.save!
-          # TODO 失敗時
-        end
+        platform = Platform.find_or_create_by!(name: name)
         ids.push(platform.id)
       end
-
       ids
     end
 
@@ -110,11 +93,8 @@ class API < Grape::API
 
     desc 'create pile'
     post do
-      # TODO transaction
-      # TODO find_or_create
-
       ActiveRecord::Base.transaction do
-        content = get_content(params[:content_name])
+        content = Content.find_or_create_by!(name: params[:content_name])
         platform_ids = get_platform_ids(params[:platform_names])
 
         new_pile = Pile.new({
@@ -141,7 +121,7 @@ class API < Grape::API
     put ':id' do
       # TODO auth
       pile = Pile.find(params[:id])
-      content = get_content(params[:content_name])
+      content = Content.find_or_create_by!(name: params[:content_name])
       platform_ids = get_platform_ids(params[:platform_names])
       pile_params = {
         content: content,
