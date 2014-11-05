@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930162305) do
+ActiveRecord::Schema.define(version: 20141105072240) do
 
   create_table "contents", force: true do |t|
     t.string   "name",       null: false
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 20140930162305) do
     t.string   "platform_ids",             null: false
     t.integer  "status",       default: 0, null: false
   end
+
+  create_table "piles_platforms", force: true do |t|
+    t.integer  "pile_id"
+    t.integer  "platform_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "piles_platforms", ["pile_id"], name: "index_piles_platforms_on_pile_id", using: :btree
+  add_index "piles_platforms", ["platform_id"], name: "index_piles_platforms_on_platform_id", using: :btree
 
   create_table "platforms", force: true do |t|
     t.string   "name",       null: false

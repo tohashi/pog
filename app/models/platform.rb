@@ -1,5 +1,6 @@
 class Platform < ActiveRecord::Base
-  # has_and_belongs_to_many :platforms
+  has_many :platforms_pile
+  has_and_belongs_to_many :piles, :through => :platforms_pile
 
   validates :name, presence: true
 

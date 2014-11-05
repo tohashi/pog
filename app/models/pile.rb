@@ -1,7 +1,10 @@
 class Pile < ActiveRecord::Base
   has_one :contents_pile
+  # TODO index
   has_one :content, :through => :contents_pile
-  # has_and_belongs_to_many :platforms
+
+  has_many :piles_platform
+  has_and_belongs_to_many :platforms, :through => :piles_platform
 
   belongs_to :user
 
@@ -10,6 +13,7 @@ class Pile < ActiveRecord::Base
   validates :memo, length: (0..40)
   validates :status, presence: true
 
+  # TODO remove
   serialize :platform_ids, Array
 
   enum status: {piling: 0, playing: 1, done: 2}
