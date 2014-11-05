@@ -164,4 +164,16 @@ class API < Grape::API
       Content.get_nearly_contents(params[:id])
     end
   end
+
+
+  resource :candidate do
+    params do
+      requires :word, type: String
+    end
+
+    desc 'returns content candidates'
+    get 'content/:word' do
+      Content.where("name like '%#{params[:word]}%'").pluck('name')
+    end
+  end
 end

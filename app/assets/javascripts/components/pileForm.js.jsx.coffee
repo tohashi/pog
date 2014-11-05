@@ -10,6 +10,7 @@ POG.PileForm = React.createClass
     platform_names: ''
     memo: ''
     status: 0
+    candidates: []
 
   handleClick: ->
     if @props.action is 'add'
@@ -21,9 +22,19 @@ POG.PileForm = React.createClass
       pile?.save {id: pile.id}, success: => @close()
 
   handleChange: (e) ->
+    {name, value} = e.target
     data = {}
-    data[e.target.name] = e.target.value
+    data[name] = value
     @setState data
+    # TODO cache
+    if value and name is 'content_name'
+      $.get "/api/candidate/content/#{value}", (res) =>
+        @setState candidates: res
+    else
+      @clearCandidates()
+
+  clearCandidates: ->
+    @setState candidates: []
 
   componentWillReceiveProps: (nextProps) ->
     return if @props.pile and nextProps.pile.id isnt nextProps.edittingId
@@ -47,15 +58,33 @@ POG.PileForm = React.createClass
        not @props.pile and @props.action isnt 'add'
       return `<div></div>`
 
+    candidateListNodes = do (=>
+      @state.candidates.map (candidate) =>
+        `<li>{candidate}</li>`
+    ).bind @
+
     `<div>
       <form role="form" accept-charset="UTF-8">
         <div className="form-group">
           <label>Name</label>
-          <input className="form-control" name="content_name" type="text" placeholder="Destiny" value={this.state.content_name} onChange={this.handleChange} />
+          <input
+            className="form-control" name="content_name" type="text" placeholder="Destiny"
+            value={this.state.content_name}
+            onChange={this.handleChange}
+            onBlur={this.clearCandidates}
+          />
+          <ul>
+            {candidateListNodes}
+          </ul>
         </div>
+
         <div className="form-group">
           <label>Platform(カンマ区切りで複数指定)</label>
-          <input className="form-control" name="platform_names" type="text" placeholder="PS4, 3DS, Steam, iOS..." value={this.state.platform_names} onChange={this.handleChange} />
+          <input
+            className="form-control" name="platform_names" type="text" placeholder="PS4, 3DS, Steam, iOS..."
+            value={this.state.platform_names}
+            onChange={this.handleChange}
+          />
         </div>
 
         <div className="form-group">
