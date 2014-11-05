@@ -17,15 +17,12 @@ class API < Grape::API
       ApplicationController.check_logined(session)
     end
 
-    def get_platform_ids(names)
-      ids = []
-      names.split(',').each do |name|
+    def find_or_create_platforms(names)
+      platforms = names.split(',').map do |name|
         name.strip!
         next if name.empty?
-        platform = Platform.find_or_create_by!(name: name)
-        ids.push(platform.id)
+        Platform.find_or_create_by!(name: name)
       end
-      ids
     end
 
     def format_pile(pile)
@@ -95,12 +92,12 @@ class API < Grape::API
     post do
       ActiveRecord::Base.transaction do
         content = Content.find_or_create_by!(name: params[:content_name])
-        platform_ids = get_platform_ids(params[:platform_names])
+        platforms = find_or_create_platforms(params[:platform_names])
 
         new_pile = Pile.new({
           user_id: current_user.id,
           content: content,
-          platform_ids: platform_ids,
+          platforms: platforms,
           memo: params[:memo],
           status: params[:status]
         })
@@ -122,10 +119,11 @@ class API < Grape::API
       # TODO auth
       pile = Pile.find(params[:id])
       content = Content.find_or_create_by!(name: params[:content_name])
-      platform_ids = get_platform_ids(params[:platform_names])
+      platforms = find_or_create_platforms(params[:platform_names])
+
       pile_params = {
         content: content,
-        platform_ids: platform_ids,
+        platforms: platforms,
         memo: params[:memo],
         status: params[:status]
       }
