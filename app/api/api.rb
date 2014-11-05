@@ -26,15 +26,10 @@ class API < Grape::API
     end
 
     def format_pile(pile)
-      platforms = []
-      pile.platform_ids.each do |platform_id|
-        platforms.push(Platform.find(platform_id))
-      end
-
       pile.attributes.merge({
         'last_updated' => time_ago_in_words(pile.updated_at),
         'content' => pile.content,
-        'platforms' => platforms
+        'platforms' => pile.platforms
       })
     end
 

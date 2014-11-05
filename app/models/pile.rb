@@ -9,12 +9,8 @@ class Pile < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, presence: true
-  validates :platform_ids, presence: true
   validates :memo, length: (0..40)
   validates :status, presence: true
-
-  # TODO remove
-  serialize :platform_ids, Array
 
   enum status: {piling: 0, playing: 1, done: 2}
 
