@@ -47,6 +47,7 @@ gem 'rails_12factor'
 gem 'grape'
 
 # frontend
+gem 'jquery-ui-rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'bootswatch-rails'

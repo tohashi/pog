@@ -29,6 +29,9 @@ POG.PileForm = React.createClass
     # TODO cache
     if value and name is 'content_name'
       $.get "/api/candidate/content/#{value}", (res) =>
+        # TODO 正しい作法
+        $('input[name="content_name"]').autocomplete
+          source: res
         @setState candidates: res
     else
       @clearCandidates()
@@ -58,11 +61,6 @@ POG.PileForm = React.createClass
        not @props.pile and @props.action isnt 'add'
       return `<div></div>`
 
-    candidateListNodes = do (=>
-      @state.candidates.map (candidate) =>
-        `<li>{candidate}</li>`
-    ).bind @
-
     `<div>
       <form role="form" accept-charset="UTF-8">
         <div className="form-group">
@@ -73,9 +71,6 @@ POG.PileForm = React.createClass
             onChange={this.handleChange}
             onBlur={this.clearCandidates}
           />
-          <ul>
-            {candidateListNodes}
-          </ul>
         </div>
 
         <div className="form-group">
