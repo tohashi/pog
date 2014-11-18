@@ -168,5 +168,10 @@ class API < Grape::API
     get 'content/:word' do
       Content.where("name like '%#{params[:word]}%'").pluck('name')
     end
+
+    desc 'returns platform candidates'
+    get 'platform' do
+      Platform.get_recomended
+    end
   end
 end

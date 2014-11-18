@@ -6,4 +6,11 @@ class Platform < ActiveRecord::Base
 
   def self.get_ranking
   end
+
+  def self.get_recomended(limit = 5)
+    rankings = Platform.all.sort_by do |platform|
+      -platform.piles.size
+    end
+    rankings[0, limit]
+  end
 end
