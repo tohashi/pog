@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :current_user
 
+  def error404
+    redirect_to root_path
+  end
+
   def current_user
     @user = ApplicationController.check_logined(session)
   end

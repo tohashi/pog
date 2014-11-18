@@ -40,7 +40,6 @@ gem 'spring',        group: :development
 
 gem 'omniauth'
 gem 'omniauth-twitter'
-gem 'omniauth-facebook'
 
 gem 'heroku'
 gem 'rails_12factor'
